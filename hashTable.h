@@ -1,9 +1,11 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
+#define _CRT_SECURE_NO_WARNINGS 1
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 
 #define TAM 127 // para tabela hash
 #define MAX 100 // para vetor de char
@@ -16,12 +18,13 @@
 #define TYPE_CHAR       6
 #define TYPE_VOID       7
 
-#define NUMBER          8
+#define NUMBERS         8
 #define VARIABLE        9
 #define DATA_TYPE       10
 #define CARACTER        11
 #define LIBRARIES       12
 #define OPERATOR        13
+#define PARAMETER       14
 
 struct cell {
     char name[MAX];
@@ -50,6 +53,10 @@ HashTable *initialization();
 // Pré-condição: A string de entrada (`name`) deve ser terminada em null.
 // Pós-condição: Retorna o valor hash (índice) para a string dentro do intervalo da tabela hash (0 a TAM-1).
 int hash(char *name); 
+
+float calculateFloat(HashTable *h, char *name, char *name2, char* operator);
+
+int calculateInt(HashTable *h, char *name, char *name2, char* operator);
 
 struct cell *SearchParser(HashTable *h, char *name);
 

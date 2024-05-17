@@ -19,6 +19,67 @@ int hash(char *name){
     return sum % TAM;
 }
 
+float calculateFloat(HashTable *h, char *name, char *name2, char* operator){
+    float opF = 0;
+    int index = hash(name);
+    int index2 = hash(name2);
+    struct cell *aux = h->table[index];
+    struct cell *aux2 = h->table[index2];
+
+    if (strcmp(operator, "+")){
+        opF = aux->fVal + aux2->fVal;
+        return opF;
+    }
+    else if (strcmp(operator, "-")){
+        opF = aux->fVal - aux2->fVal;
+        return opF;
+    }
+    else if (strcmp(operator, "*")){
+        opF = aux->fVal * aux2->fVal;
+        return opF;
+    }
+    else if (strcmp(operator, "/")){
+       if(aux2->fVal != 0.00 && aux->fVal != 0.00 ){
+            opF = aux->fVal / aux2->fVal;
+        }
+        else printf("Não é possivel efetuar a operação de divisão\n");     
+        return opF;
+    }
+}
+
+int calculateInt(HashTable *h, char *name, char *name2, char* operator){
+    int op = 0;
+    float opF;
+    int index = hash(name);
+    int index2 = hash(name2);
+    struct cell *aux = h->table[index];
+    struct cell *aux2 = h->table[index2];
+
+    if (strcmp(operator, "+")){
+        if(aux->type == 1)
+            op = aux->iVal + aux2->iVal;
+        return op;
+    }
+    else if (strcmp(operator, "-")){
+        if(aux->type == 1)
+            op = aux->iVal - aux2->iVal;
+        return op;
+    }
+    else if (strcmp(operator, "*")){
+        if(aux->type == 1)
+            op = aux->iVal * aux2->iVal;
+        return op;
+    }
+    else if (strcmp(operator, "/")){
+       if(aux->type == 1)
+            if(aux2->iVal != 0 && aux->iVal != 0 ){
+                op = aux->iVal / aux2->iVal;
+            }
+            else printf("Não é possivel efetuar a operação de divisão\n");
+        return op;
+    }
+}
+
 void setType(HashTable *h, char *name, int type){
     int index = hash(name);
     struct cell *aux = h->table[index];
@@ -101,7 +162,7 @@ void printHash(HashTable *H){
     int printed_names[MAX] = {0}; // Flag array to track printed names
 
     printf("----------------------------------------------------------------------------------\n");
-    printf("|\tTOKEN \t\t|\tTipo\t|\tLinha(s)\n");
+    printf("|\tTOKEN \t\t|\tTipo\t\t|\tCategoria\t\t|\tLinha(s)\n");
     printf("----------------------------------------------------------------------------------\n");
      for (int i = 0; i < TAM; i++){
         aux = H->table[i];
@@ -131,6 +192,32 @@ void printHash(HashTable *H){
                 printf("|\t TYPE_VOID\t|"); 
                 break;        
             default:
+                break;
+            }
+            switch (aux->category){
+            case 8:
+               printf("\t  NUMBERS\t|");
+                break;
+            case 9:
+                printf("\t VARIABLE\t|");
+                break;
+            case 10:
+                printf("\t DATA_TYPE\t|"); 
+                break;
+            case 11:
+                printf("\t CARACTER\t|"); 
+                break;
+            case 12:
+                printf("\t LIBRARIES\t|"); 
+                break;
+            case 13: 
+                printf("\t OPERATOR\t|");
+                break;
+            case 14:
+                printf("\t PARAMETER\t|"); 
+                break;        
+            default:
+                printf("\t          \t|");
                 break;
             }
             printf("%2d", aux->lineno);
