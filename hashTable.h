@@ -8,17 +8,31 @@
 #define TAM 127 // para tabela hash
 #define MAX 100 // para vetor de char
 
+#define TYPE_INT        1
+#define TYPE_REAL       2
+#define TYPE_STR        3
+#define TYPE_UNDEF      4
+#define TYPE_KEYWORD    5
+#define TYPE_CHAR       6
+#define TYPE_VOID       7
+
+#define NUMBER          8
+#define VARIABLE        9
+#define DATA_TYPE       10
+#define CARACTER        11
+#define LIBRARIES       12
+#define OPERATOR        13
+
 struct cell {
     char name[MAX];
     int lineno;
     int len;
-    union{
-        int iVal; //variavel para quando for inteiro 
-        float fVal;//variavel para quando for float/double
-        char *cVal; //usar tanto para char quanto para string 
-    }dataType;
+    int iVal; //variavel para quando for inteiro 
+    float fVal;//variavel para quando for float/double
+    char cVal[MAX]; //usar tanto para char quanto para string 
     int value; //variavel para guardar valores de expressão ou variavel
-    char type[MAX]; //para guardar se é inteiro/float/char
+    int type; //para guardar se é inteiro/float/char
+    int category;
     struct cell *prox;
 };
 
@@ -36,6 +50,12 @@ HashTable *initialization();
 // Pré-condição: A string de entrada (`name`) deve ser terminada em null.
 // Pós-condição: Retorna o valor hash (índice) para a string dentro do intervalo da tabela hash (0 a TAM-1).
 int hash(char *name); 
+
+struct cell *SearchParser(HashTable *h, char *name);
+
+void setType(HashTable *h, char *name, int type);
+
+void setCategory(HashTable *h, char *name, int cat);
 
 // Função para buscar um token (nome) na tabela hash
 // Pré-condição: 
@@ -55,7 +75,7 @@ int SearchToken(struct cell *aux, char *name) ;
 //                - Se for encontrada uma duplicata, uma nova célula com o número de linha atualizado 
 //                  é anexada à lista ligada no índice correspondente.
 //                - Se for um novo token, uma nova célula é criada e inserida no início da lista ligada.
-void inserts(HashTable *h, char *name, int len, int line, char *type);
+void inserts(HashTable *h, char *name, int len, int line, int type, int cat);
 
 // Função para mostrar a tabela Hash no Terminal
 // Pré-condição:
