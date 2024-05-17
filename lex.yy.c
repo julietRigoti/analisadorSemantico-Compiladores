@@ -834,7 +834,7 @@ case 1:
 YY_RULE_SETUP
 #line 52 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return WHILE;
 }
@@ -843,7 +843,7 @@ case 2:
 YY_RULE_SETUP
 #line 57 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return FOR;
 }
@@ -852,7 +852,7 @@ case 3:
 YY_RULE_SETUP
 #line 62 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return IF;
 }
@@ -861,7 +861,7 @@ case 4:
 YY_RULE_SETUP
 #line 67 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return ELSE;
 }
@@ -870,7 +870,7 @@ case 5:
 YY_RULE_SETUP
 #line 72 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return CHAR;
 }
@@ -879,7 +879,7 @@ case 6:
 YY_RULE_SETUP
 #line 77 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return VOID;
 }
@@ -888,7 +888,7 @@ case 7:
 YY_RULE_SETUP
 #line 82 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return INT;
 }
@@ -897,7 +897,7 @@ case 8:
 YY_RULE_SETUP
 #line 87 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return FLOAT;
 }
@@ -906,7 +906,7 @@ case 9:
 YY_RULE_SETUP
 #line 92 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return DOUBLE;
 }
@@ -915,7 +915,7 @@ case 10:
 YY_RULE_SETUP
 #line 97 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return RETURN;
 }
@@ -924,7 +924,7 @@ case 11:
 YY_RULE_SETUP
 #line 102 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return PRINTF;
 }
@@ -933,7 +933,7 @@ case 12:
 YY_RULE_SETUP
 #line 107 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return SCANF;
 }
@@ -942,7 +942,7 @@ case 13:
 YY_RULE_SETUP
 #line 112 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "STR_TYPE");
     strcpy(yylval.obj.name, (yytext));
     return STR;
 }
@@ -952,7 +952,7 @@ YY_RULE_SETUP
 #line 117 "lexico.l"
 {
     if(strlen(yytext) < 10){
-        inserts(H, yytext, strlen(yytext), flag);
+        inserts(H, yytext, strlen(yytext), flag, "UNDEF");
         strcpy(yylval.obj.name, (yytext));
         return ID;
     }
@@ -966,7 +966,7 @@ case 15:
 YY_RULE_SETUP
 #line 128 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     strcpy(yylval.obj.name, (yytext));
     return NUMBER;
 }
@@ -975,7 +975,7 @@ case 16:
 YY_RULE_SETUP
 #line 133 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     strcpy(yylval.obj.name, (yytext));
     return SUM;
 }
@@ -984,7 +984,7 @@ case 17:
 YY_RULE_SETUP
 #line 138 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     strcpy(yylval.obj.name, (yytext));
     return SUB;
 }
@@ -993,7 +993,7 @@ case 18:
 YY_RULE_SETUP
 #line 143 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     strcpy(yylval.obj.name, (yytext));
     return MULT;
 } 
@@ -1002,7 +1002,7 @@ case 19:
 YY_RULE_SETUP
 #line 148 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     strcpy(yylval.obj.name, (yytext));
     return DIV;
 }
@@ -1011,7 +1011,7 @@ case 20:
 YY_RULE_SETUP
 #line 153 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     strcpy(yylval.obj.name, (yytext));
     return POW;
 }
@@ -1020,7 +1020,7 @@ case 21:
 YY_RULE_SETUP
 #line 158 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     strcpy(yylval.obj.name, (yytext));
     return MOD;
 }
@@ -1029,7 +1029,7 @@ case 22:
 YY_RULE_SETUP
 #line 163 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     strcpy(yylval.obj.name, (yytext));
     return INCR;
 }
@@ -1038,7 +1038,7 @@ case 23:
 YY_RULE_SETUP
 #line 168 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     strcpy(yylval.obj.name, (yytext));
     return DECR;
 }
@@ -1047,7 +1047,7 @@ case 24:
 YY_RULE_SETUP
 #line 173 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "LOGIC_TYPE");
     strcpy(yylval.obj.name, (yytext));
     return AND;
 }
@@ -1056,7 +1056,7 @@ case 25:
 YY_RULE_SETUP
 #line 178 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "LOGIC_TYPE");
     strcpy(yylval.obj.name, (yytext));
     return OR;
 }
@@ -1065,7 +1065,7 @@ case 26:
 YY_RULE_SETUP
 #line 183 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "LOGIC_TYPE");
     strcpy(yylval.obj.name, (yytext));
     return NOT;
 }
@@ -1074,7 +1074,7 @@ case 27:
 YY_RULE_SETUP
 #line 188 "lexico.l"
 {
-    inserts(HT, yytext, strlen(yytext), flag);
+    inserts(HT, yytext, strlen(yytext), flag, "KEYWORD");
     strcpy(yylval.obj.name, (yytext));
     return INCLUDE;
 }
@@ -1083,7 +1083,7 @@ case 28:
 YY_RULE_SETUP
 #line 193 "lexico.l"
 { 
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     return O_KEY;
 }
 	YY_BREAK
@@ -1091,7 +1091,7 @@ case 29:
 YY_RULE_SETUP
 #line 197 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     return O_BRAC;
 }
 	YY_BREAK
@@ -1099,7 +1099,7 @@ case 30:
 YY_RULE_SETUP
 #line 201 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     return O_PAR;
 }
 	YY_BREAK
@@ -1107,7 +1107,7 @@ case 31:
 YY_RULE_SETUP
 #line 205 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     return C_PAR;
 }
 	YY_BREAK
@@ -1115,7 +1115,7 @@ case 32:
 YY_RULE_SETUP
 #line 209 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     return C_BRAC;       
 }
 	YY_BREAK
@@ -1123,7 +1123,7 @@ case 33:
 YY_RULE_SETUP
 #line 213 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     return C_KEY;
 }
 	YY_BREAK
@@ -1131,7 +1131,7 @@ case 34:
 YY_RULE_SETUP
 #line 217 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     return O_COMENT;
 }
 	YY_BREAK
@@ -1139,7 +1139,7 @@ case 35:
 YY_RULE_SETUP
 #line 221 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     return C_COMENT;
 }
 	YY_BREAK
@@ -1147,7 +1147,7 @@ case 36:
 YY_RULE_SETUP
 #line 225 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     strcpy(yylval.obj.name, (yytext));
     return COMPARATOR;
 }
@@ -1156,7 +1156,7 @@ case 37:
 YY_RULE_SETUP
 #line 230 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     strcpy(yylval.obj.name, (yytext));
     return ASSIGMENT;
 }
@@ -1165,7 +1165,7 @@ case 38:
 YY_RULE_SETUP
 #line 235 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     return SEMICOLON;
 }
 	YY_BREAK
@@ -1173,7 +1173,7 @@ case 39:
 YY_RULE_SETUP
 #line 239 "lexico.l"
 {
-    inserts(H, yytext, strlen(yytext), flag);
+    inserts(H, yytext, strlen(yytext), flag, "UNDEF");
     return COMMA;
 }
 	YY_BREAK

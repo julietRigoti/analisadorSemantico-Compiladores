@@ -12,6 +12,13 @@ struct cell {
     char name[MAX];
     int lineno;
     int len;
+    union{
+        int iVal; //variavel para quando for inteiro 
+        float fVal;//variavel para quando for float/double
+        char *cVal; //usar tanto para char quanto para string 
+    }dataType;
+    int value; //variavel para guardar valores de expressão ou variavel
+    char type[MAX]; //para guardar se é inteiro/float/char
     struct cell *prox;
 };
 
@@ -48,7 +55,7 @@ int SearchToken(struct cell *aux, char *name) ;
 //                - Se for encontrada uma duplicata, uma nova célula com o número de linha atualizado 
 //                  é anexada à lista ligada no índice correspondente.
 //                - Se for um novo token, uma nova célula é criada e inserida no início da lista ligada.
-void inserts(HashTable *h, char *name, int line, int len);
+void inserts(HashTable *h, char *name, int len, int line, char *type);
 
 // Função para mostrar a tabela Hash no Terminal
 // Pré-condição:

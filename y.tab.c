@@ -2187,6 +2187,9 @@ int main(int argc, char *argv[]){
 		if(yyin != NULL){
 			yylex();
 			yyparse();
+
+			for (int i = 0; i < TAM; i++){
+        		printf("name[%d] = %s\n", i,  HT->table[i]->name);}
 			
 			printHash(HT);
 			printHash(H);
