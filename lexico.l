@@ -68,27 +68,27 @@ ERROID ({LETTER}|{NUMBER})("$"|"@"|{LETTER}|{NUMBER})+
     return ELSE;
 }
 (char) {
-    inserts(HT, yytext, strlen(yytext), flag, 5, 5);
+    inserts(HT, yytext, strlen(yytext), flag, 5, 10);
     strcpy(yylval.obj.name, (yytext));
     return CHAR;
 }
 (void) {
-    inserts(HT, yytext, strlen(yytext), flag, 5, 5);
+    inserts(HT, yytext, strlen(yytext), flag, 5, 10);
     strcpy(yylval.obj.name, (yytext));
     return VOID;
 }
 (int) {
-    inserts(HT, yytext, strlen(yytext), flag, 5, 5);
+    inserts(HT, yytext, strlen(yytext), flag, 5, 10);
     strcpy(yylval.obj.name, (yytext));
     return INT;
 }
 (float) {
-    inserts(HT, yytext, strlen(yytext), flag, 5, 5);
+    inserts(HT, yytext, strlen(yytext), flag, 5, 10);
     strcpy(yylval.obj.name, (yytext));
     return FLOAT;
 }
 (double) {
-    inserts(HT, yytext, strlen(yytext), flag, 5, 5);
+    inserts(HT, yytext, strlen(yytext), flag, 5, 10);
     strcpy(yylval.obj.name, (yytext));
     return DOUBLE;
 }
@@ -108,7 +108,7 @@ ERROID ({LETTER}|{NUMBER})("$"|"@"|{LETTER}|{NUMBER})+
     return SCANF;
 }
 {STR} {
-    inserts(H, yytext, strlen(yytext), flag, 3, 3);
+    inserts(H, yytext, strlen(yytext), flag, 3, 11);
     strcpy(yylval.obj.name, (yytext));
     return STR;
 }
@@ -124,57 +124,57 @@ ERROID ({LETTER}|{NUMBER})("$"|"@"|{LETTER}|{NUMBER})+
     }
 }
 {NUMBER} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 8);
     strcpy(yylval.obj.name, (yytext));
     return NUMBER;
 }
 {SUM} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return SUM;
 }
 {SUB} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return SUB;
 }
 {MULT} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return MULT;
 } 
 {DIV} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return DIV;
 }
 {INCR} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return INCR;
 }
 {DECR} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return DECR;
 }
 {AND} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 413);
     strcpy(yylval.obj.name, (yytext));
     return AND;
 }
 {OR} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return OR;
 }
 {NOT} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return NOT;
 }
 {INCLUDE} {
-    inserts(HT, yytext, strlen(yytext), flag, 5, 5);
+    inserts(HT, yytext, strlen(yytext), flag, 5, 12);
     strcpy(yylval.obj.name, (yytext));
     return INCLUDE;
 }
@@ -211,12 +211,12 @@ ERROID ({LETTER}|{NUMBER})("$"|"@"|{LETTER}|{NUMBER})+
     return C_COMENT;
 }
 {COMPARATOR} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return COMPARATOR;
 }
 {ASSIGMENT} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(H, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return ASSIGMENT;
 }

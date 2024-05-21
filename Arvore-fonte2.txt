@@ -1,0 +1,2 @@
+
+Não é possivel criar a arvore sintatica! Possui erros lexicos, sintaticos e semanticos no codigo.

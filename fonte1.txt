@@ -1,19 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-int main(char argv[]){
-    int i = 0, j, aux; 
-    char aux[] = "Compiladores";
-    
-    if(i == 0){
-        scanf("%d", aux); 
 
-        for(int a = 0, b = 1; aux < 10; aux++, a--, b++){
-            printf("aux = %d\n", aux);
-            if(b == 0){
-                b = 1;
-            }
-        }
-    }
+int main(){
+    int iix = 10; 
+    int ix = a; 
+    char cx, ccx;
+    double dx;
+    float fx;
+    void vx;
+
     return 0;
 }

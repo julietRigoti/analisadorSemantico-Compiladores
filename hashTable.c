@@ -2,21 +2,56 @@
 
 HashTable *initialization(){
     int i;
-    HashTable *aux = (HashTable *)malloc(sizeof(HashTable)); // alloca o primeiro ponteiro
-    aux->table = (struct cell **)malloc(TAM * sizeof(struct cell *)); // cria o vetor de ponteiros
-    for (i = 0; i < TAM; i++){
-        aux->table[i] = NULL;
+    HashTable *aux = (HashTable *)malloc(sizeof(HashTable)); // Allocate memory for HashTable structure
+    if (aux == NULL) {  // Check for allocation failure
+        return NULL;
     }
+
+    aux->table = (struct cell **)malloc(TAM * sizeof(struct cell *));  // Allocate memory for table array
+    if (aux->table == NULL) {  // Check for allocation failure
+        free(aux);  // Release previously allocated memory
+        return NULL;
+    }
+
+    for (i = 0; i < TAM; i++) {
+        aux->table[i] = NULL;  // Initialize each cell pointer to NULL
+    }
+
     return aux;
 }
+
 
 int hash(char *name){
     int sum = 0;
     for (int i = 0; name[i] != '\0'; i++){
         sum += name[i];
-        sum += 100;
+        sum += 2;
     }
     return sum % TAM;
+}
+
+void getValue(HashTable *h, char *name, char *op){
+    printf("name = %s op = %s\n", name, op);
+    int index = hash(name);
+    int index2 = hash(op);
+    struct cell *aux = h->table[index];
+    struct cell *aux2 = h->table[index2];
+    printf("aux2->type = %d\n\n", aux2->type);
+    switch (aux2->type){
+    case 1:
+        aux->iVal = atoi(aux2->name);
+        printf("aux->iVal = %d\n",aux->iVal);
+        break;
+    case 2: 
+        aux->fVal = atof(aux2->name);
+        break;
+    case 3: case 6:
+        strcpy(aux->cVal, aux2->name);
+        break;
+    default:
+        break;
+    }
+    
 }
 
 float calculateFloat(HashTable *h, char *name, char *name2, char* operator){
@@ -88,6 +123,8 @@ void setType(HashTable *h, char *name, int type){
 
 void setCategory(HashTable *h, char *name, int cat){
     int index = hash(name);
+    printf("name = %s\n", name);
+    printf("index para categoria = %d\n", index);
     struct cell *aux = h->table[index];
     aux->category = cat;
 }
@@ -136,6 +173,7 @@ struct cell *slot(char *name, int len, int line, int type, int cat){
         break;
     }
     strcpy(new_cell->name, name);
+    new_cell->value = 0;
     new_cell->prox = NULL;
 
     return new_cell;
@@ -157,69 +195,103 @@ void inserts(HashTable *h, char *name, int len, int line, int type, int cat){
     }
 }
 
+void finalization(HashTable *H){
+    for (int i = 0; i < TAM; i++) {
+        struct cell *p = H->table[i];
+        while (p != NULL) {
+        struct cell *aux = p;
+        p = p->prox;
+        free(aux);
+        }
+    }
+
+  // Desaloca o vetor de ponteiros da tabela hash
+  free(H->table);
+
+  // Desaloca a estrutura principal da tabela hash
+  free(H);
+}
+
 void printHash(HashTable *H){
     struct cell *aux;
     int printed_names[MAX] = {0}; // Flag array to track printed names
 
     printf("----------------------------------------------------------------------------------\n");
-    printf("|\tTOKEN \t\t|\tTipo\t\t|\tCategoria\t\t|\tLinha(s)\n");
+    printf("|\tTOKEN\t|\tTipo\t|\tCategoria\t|\tValor\t|\tLinha(s)\n");
     printf("----------------------------------------------------------------------------------\n");
      for (int i = 0; i < TAM; i++){
         aux = H->table[i];
         while (aux != NULL){
-            printf("|%10s\t\t", aux->name);
-            switch (aux->type)
-            {
+            printf("| %-26s\t", aux->name);
+            switch (aux->type){
             case 1:
-               printf("|\t TYPE_INT\t|");
+               printf("| TYPE_INT\t|");
                 break;
             case 2:
-                printf("|\t TYPE_REAL\t|");
+                printf("| TYPE_REAL\t|");
                 break;
             case 3:
-                printf("|\t TYPE_STR\t|"); 
+                printf("| TYPE_STR\t|"); 
                 break;
             case 4:
-                printf("|\t TYPE_UNDEF\t|"); 
+                printf("| TYPE_UNDEF\t|"); 
                 break;
             case 5:
-                printf("|\t TYPE_KEYWORD\t|"); 
+                printf("| TYPE_KEYWORD\t|"); 
                 break;
             case 6: 
-                printf("|\t TYPE_CHAR\t|");
+                printf("| TYPE_CHAR\t|");
                 break;
             case 7:
-                printf("|\t TYPE_VOID\t|"); 
+                printf("| TYPE_VOID\t|"); 
                 break;        
             default:
+                printf("           \t|");
                 break;
             }
             switch (aux->category){
             case 8:
-               printf("\t  NUMBERS\t|");
+               printf("   NUMBERS\t|");
                 break;
             case 9:
-                printf("\t VARIABLE\t|");
+                printf("  VARIABLE\t|");
                 break;
             case 10:
-                printf("\t DATA_TYPE\t|"); 
+                printf("  DATA_TYPE\t|"); 
                 break;
             case 11:
-                printf("\t CARACTER\t|"); 
+                printf("  CARACTER\t|"); 
                 break;
             case 12:
-                printf("\t LIBRARIES\t|"); 
+                printf("  LIBRARIES\t|"); 
                 break;
             case 13: 
-                printf("\t OPERATOR\t|");
+                printf("  OPERATOR\t|");
                 break;
             case 14:
-                printf("\t PARAMETER\t|"); 
-                break;        
+                printf("  PARAMETER\t|"); 
+                break;
+            case 15:
+                printf("  FUNCTION\t|"); 
+                break;           
             default:
-                printf("\t          \t|");
+                printf("           \t|");
                 break;
             }
+            
+            switch (aux->type){
+            case 1:
+                printf("%-10d\t|", aux->iVal);
+                break;
+            case 2:
+                printf("%-10.2f\t|", aux->fVal);
+            case 3: 
+                printf("%-10s\t|", aux->cVal);
+            default:
+                printf("             \t|");
+                break;
+            }
+            
             printf("%2d", aux->lineno);
             aux = aux->prox;
             while (aux != NULL){
@@ -229,4 +301,5 @@ void printHash(HashTable *H){
             printf("\t\n");
         }
     }
+    finalization(H);
 }

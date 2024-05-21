@@ -1,7 +1,6 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
-#define _CRT_SECURE_NO_WARNINGS 1
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -25,6 +24,7 @@
 #define LIBRARIES       12
 #define OPERATOR        13
 #define PARAMETER       14
+#define FUNCTION        15
 
 struct cell {
     char name[MAX];
@@ -53,6 +53,8 @@ HashTable *initialization();
 // Pré-condição: A string de entrada (`name`) deve ser terminada em null.
 // Pós-condição: Retorna o valor hash (índice) para a string dentro do intervalo da tabela hash (0 a TAM-1).
 int hash(char *name); 
+
+void getValue(HashTable *h, char *name, char *op);
 
 float calculateFloat(HashTable *h, char *name, char *name2, char* operator);
 
