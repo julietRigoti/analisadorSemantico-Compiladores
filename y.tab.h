@@ -70,27 +70,28 @@ extern int yydebug;
     VOID = 271,                    /* VOID  */
     FLOAT = 272,                   /* FLOAT  */
     DOUBLE = 273,                  /* DOUBLE  */
-    NUMBER = 274,                  /* NUMBER  */
-    STR = 275,                     /* STR  */
-    O_KEY = 276,                   /* O_KEY  */
-    O_BRAC = 277,                  /* O_BRAC  */
-    O_PAR = 278,                   /* O_PAR  */
-    C_PAR = 279,                   /* C_PAR  */
-    C_BRAC = 280,                  /* C_BRAC  */
-    C_KEY = 281,                   /* C_KEY  */
-    O_COMENT = 282,                /* O_COMENT  */
-    C_COMENT = 283,                /* C_COMENT  */
-    SEMICOLON = 284,               /* SEMICOLON  */
-    COMMA = 285,                   /* COMMA  */
-    INCLUDE = 286,                 /* INCLUDE  */
-    PRINTF = 287,                  /* PRINTF  */
-    SCANF = 288,                   /* SCANF  */
-    WHILE = 289,                   /* WHILE  */
-    FOR = 290,                     /* FOR  */
-    IF = 291,                      /* IF  */
-    ELSE = 292,                    /* ELSE  */
-    ID = 293,                      /* ID  */
-    RETURN = 294                   /* RETURN  */
+    INTEGER = 274,                 /* INTEGER  */
+    REAL = 275,                    /* REAL  */
+    STR = 276,                     /* STR  */
+    O_KEY = 277,                   /* O_KEY  */
+    O_BRAC = 278,                  /* O_BRAC  */
+    O_PAR = 279,                   /* O_PAR  */
+    C_PAR = 280,                   /* C_PAR  */
+    C_BRAC = 281,                  /* C_BRAC  */
+    C_KEY = 282,                   /* C_KEY  */
+    O_COMENT = 283,                /* O_COMENT  */
+    C_COMENT = 284,                /* C_COMENT  */
+    SEMICOLON = 285,               /* SEMICOLON  */
+    COMMA = 286,                   /* COMMA  */
+    INCLUDE = 287,                 /* INCLUDE  */
+    PRINTF = 288,                  /* PRINTF  */
+    SCANF = 289,                   /* SCANF  */
+    RETURN = 290,                  /* RETURN  */
+    WHILE = 291,                   /* WHILE  */
+    FOR = 292,                     /* FOR  */
+    IF = 293,                      /* IF  */
+    ELSE = 294,                    /* ELSE  */
+    ID = 295                       /* ID  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -115,33 +116,34 @@ extern int yydebug;
 #define VOID 271
 #define FLOAT 272
 #define DOUBLE 273
-#define NUMBER 274
-#define STR 275
-#define O_KEY 276
-#define O_BRAC 277
-#define O_PAR 278
-#define C_PAR 279
-#define C_BRAC 280
-#define C_KEY 281
-#define O_COMENT 282
-#define C_COMENT 283
-#define SEMICOLON 284
-#define COMMA 285
-#define INCLUDE 286
-#define PRINTF 287
-#define SCANF 288
-#define WHILE 289
-#define FOR 290
-#define IF 291
-#define ELSE 292
-#define ID 293
-#define RETURN 294
+#define INTEGER 274
+#define REAL 275
+#define STR 276
+#define O_KEY 277
+#define O_BRAC 278
+#define O_PAR 279
+#define C_PAR 280
+#define C_BRAC 281
+#define C_KEY 282
+#define O_COMENT 283
+#define C_COMENT 284
+#define SEMICOLON 285
+#define COMMA 286
+#define INCLUDE 287
+#define PRINTF 288
+#define SCANF 289
+#define RETURN 290
+#define WHILE 291
+#define FOR 292
+#define IF 293
+#define ELSE 294
+#define ID 295
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 17 "parser.y"
+#line 18 "parser.y"
 
 		struct teste{
 			char name[MAX*2];
@@ -152,7 +154,7 @@ union YYSTYPE
 			struct node* tr; 
 		} obj;
 
-#line 156 "y.tab.h"
+#line 158 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -2,13 +2,18 @@
 #include <string.h>
 #include <stdlib.h>
 
-int main(){
-    int iix = 10; 
-    int ix = a; 
+int main(char argv[]){
+    int ix, iix;
+    float ffx;
+    double dx, ddx;
     char cx, ccx;
-    double dx;
-    float fx;
-    void vx;
+    void vx, vvx;
+    
+    ix = 2;
 
-    return 0;
+    int lx = 3 + 2; 
+    float fx = 10.5 - 5.5; 
+    lx = 50 * 5;
+
+    return 1;
 }

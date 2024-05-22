@@ -20,27 +20,24 @@ HashTable *initialization(){
     return aux;
 }
 
-
 int hash(char *name){
     int sum = 0;
     for (int i = 0; name[i] != '\0'; i++){
         sum += name[i];
-        sum += 2;
+        sum *= 2;
     }
     return sum % TAM;
 }
 
 void getValue(HashTable *h, char *name, char *op){
-    printf("name = %s op = %s\n", name, op);
     int index = hash(name);
     int index2 = hash(op);
     struct cell *aux = h->table[index];
     struct cell *aux2 = h->table[index2];
-    printf("aux2->type = %d\n\n", aux2->type);
+    
     switch (aux2->type){
     case 1:
         aux->iVal = atoi(aux2->name);
-        printf("aux->iVal = %d\n",aux->iVal);
         break;
     case 2: 
         aux->fVal = atof(aux2->name);
@@ -61,19 +58,19 @@ float calculateFloat(HashTable *h, char *name, char *name2, char* operator){
     struct cell *aux = h->table[index];
     struct cell *aux2 = h->table[index2];
 
-    if (strcmp(operator, "+")){
+    if (strcmp(operator, "+") == 0){
         opF = aux->fVal + aux2->fVal;
         return opF;
     }
-    else if (strcmp(operator, "-")){
+    else if (strcmp(operator, "-") == 0){
         opF = aux->fVal - aux2->fVal;
         return opF;
     }
-    else if (strcmp(operator, "*")){
+    else if (strcmp(operator, "*") == 0){
         opF = aux->fVal * aux2->fVal;
         return opF;
     }
-    else if (strcmp(operator, "/")){
+    else if (strcmp(operator, "/") == 0){
        if(aux2->fVal != 0.00 && aux->fVal != 0.00 ){
             opF = aux->fVal / aux2->fVal;
         }
@@ -84,28 +81,26 @@ float calculateFloat(HashTable *h, char *name, char *name2, char* operator){
 
 int calculateInt(HashTable *h, char *name, char *name2, char* operator){
     int op = 0;
-    float opF;
     int index = hash(name);
     int index2 = hash(name2);
     struct cell *aux = h->table[index];
     struct cell *aux2 = h->table[index2];
-
-    if (strcmp(operator, "+")){
+    if (strcmp(operator, "+") == 0){
         if(aux->type == 1)
             op = aux->iVal + aux2->iVal;
         return op;
     }
-    else if (strcmp(operator, "-")){
+    else if (strcmp(operator, "-") == 0){
         if(aux->type == 1)
             op = aux->iVal - aux2->iVal;
         return op;
     }
-    else if (strcmp(operator, "*")){
+    else if (strcmp(operator, "*") == 0){
         if(aux->type == 1)
             op = aux->iVal * aux2->iVal;
         return op;
     }
-    else if (strcmp(operator, "/")){
+    else if (strcmp(operator, "/") == 0){
        if(aux->type == 1)
             if(aux2->iVal != 0 && aux->iVal != 0 ){
                 op = aux->iVal / aux2->iVal;
@@ -113,6 +108,7 @@ int calculateInt(HashTable *h, char *name, char *name2, char* operator){
             else printf("Não é possivel efetuar a operação de divisão\n");
         return op;
     }
+    return op;
 }
 
 void setType(HashTable *h, char *name, int type){
@@ -123,8 +119,6 @@ void setType(HashTable *h, char *name, int type){
 
 void setCategory(HashTable *h, char *name, int cat){
     int index = hash(name);
-    printf("name = %s\n", name);
-    printf("index para categoria = %d\n", index);
     struct cell *aux = h->table[index];
     aux->category = cat;
 }
@@ -173,7 +167,6 @@ struct cell *slot(char *name, int len, int line, int type, int cat){
         break;
     }
     strcpy(new_cell->name, name);
-    new_cell->value = 0;
     new_cell->prox = NULL;
 
     return new_cell;
@@ -217,12 +210,13 @@ void printHash(HashTable *H){
     int printed_names[MAX] = {0}; // Flag array to track printed names
 
     printf("----------------------------------------------------------------------------------\n");
-    printf("|\tTOKEN\t|\tTipo\t|\tCategoria\t|\tValor\t|\tLinha(s)\n");
+    printf("|\tTOKEN\t\t\t|\tTipo\t|   Categoria   |\tValor\t| Linha(s)\n");
     printf("----------------------------------------------------------------------------------\n");
      for (int i = 0; i < TAM; i++){
         aux = H->table[i];
         while (aux != NULL){
             printf("| %-26s\t", aux->name);
+
             switch (aux->type){
             case 1:
                printf("| TYPE_INT\t|");

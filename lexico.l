@@ -41,9 +41,11 @@ COMMA (",")
 INCLUDE ("#include"[ ]*<.+\.h>)
 LETTER [a-zA-Z] 
 STR (\".*\") 
-NUMBER [0-9]+
-ID {LETTER}({LETTER}|{NUMBER})* 
-ERROID ({LETTER}|{NUMBER})("$"|"@"|{LETTER}|{NUMBER})+
+DIG [0-9]
+INTEGER ([-]?{DIG}+)
+REAL ({DIG}+)\.({DIG}+)
+ID {LETTER}({LETTER}|{DIG})* 
+ERROID ({LETTER}|{DIG})("$"|"@"|{LETTER}|{DIG})+
 
 %%
 
@@ -123,53 +125,58 @@ ERROID ({LETTER}|{NUMBER})("$"|"@"|{LETTER}|{NUMBER})+
         strcpy(yylval.obj.name, (yytext));
     }
 }
-{NUMBER} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 8);
+{INTEGER} {
+    inserts(H, yytext, strlen(yytext), flag, 1, 8);
     strcpy(yylval.obj.name, (yytext));
-    return NUMBER;
+    return INTEGER;
+}
+{REAL} {
+    inserts(H, yytext, strlen(yytext), flag, 2, 8);
+    strcpy(yylval.obj.name, (yytext));
+    return REAL;
 }
 {SUM} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 13);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return SUM;
 }
 {SUB} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 13);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return SUB;
 }
 {MULT} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 13);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return MULT;
 } 
 {DIV} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 13);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return DIV;
 }
 {INCR} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 13);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return INCR;
 }
 {DECR} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 13);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return DECR;
 }
 {AND} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 413);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 413);
     strcpy(yylval.obj.name, (yytext));
     return AND;
 }
 {OR} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 13);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return OR;
 }
 {NOT} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 13);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return NOT;
 }
@@ -179,53 +186,53 @@ ERROID ({LETTER}|{NUMBER})("$"|"@"|{LETTER}|{NUMBER})+
     return INCLUDE;
 }
 {O_KEY} { 
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 4);
     return O_KEY;
 }
 {O_BRAC} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 4);
     return O_BRAC;
 }
 {O_PAR} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 4);
     return O_PAR;
 }
 {C_PAR} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 4);
     return C_PAR;
 }
 {C_BRAC} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 4);
     return C_BRAC;       
 }
 {C_KEY} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 4);
     return C_KEY;
 }
 {O_COMENT} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 4);
     return O_COMENT;
 }
 {C_COMENT} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 4);
     return C_COMENT;
 }
 {COMPARATOR} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 13);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return COMPARATOR;
 }
 {ASSIGMENT} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 13);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 13);
     strcpy(yylval.obj.name, (yytext));
     return ASSIGMENT;
 }
 {SEMICOLON} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 4);
     return SEMICOLON;
 }
 {COMMA} {
-    inserts(H, yytext, strlen(yytext), flag, 4, 4);
+    inserts(HT, yytext, strlen(yytext), flag, 4, 4);
     return COMMA;
 }
 

@@ -9,6 +9,7 @@
 #define TAM 127 // para tabela hash
 #define MAX 100 // para vetor de char
 
+/*Tipo de Dado*/
 #define TYPE_INT        1
 #define TYPE_REAL       2
 #define TYPE_STR        3
