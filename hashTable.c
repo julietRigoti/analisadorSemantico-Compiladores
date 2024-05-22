@@ -282,7 +282,7 @@ void printHash(HashTable *H){
             case 3: 
                 printf("%-10s\t|", aux->cVal);
             default:
-                printf("             \t|");
+                printf("-------\t|");
                 break;
             }
             

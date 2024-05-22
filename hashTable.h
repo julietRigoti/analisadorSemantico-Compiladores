@@ -5,27 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #define TAM 127 // para tabela hash
 #define MAX 100 // para vetor de char
-
-/*Tipo de Dado*/
-#define TYPE_INT        1
-#define TYPE_REAL       2
-#define TYPE_STR        3
-#define TYPE_UNDEF      4
-#define TYPE_KEYWORD    5
-#define TYPE_CHAR       6
-#define TYPE_VOID       7
-
-#define NUMBERS         8
-#define VARIABLE        9
-#define DATA_TYPE       10
-#define CARACTER        11
-#define LIBRARIES       12
-#define OPERATOR        13
-#define PARAMETER       14
-#define FUNCTION        15
 
 struct cell {
     char name[MAX];
@@ -55,16 +36,40 @@ HashTable *initialization();
 // Pós-condição: Retorna o valor hash (índice) para a string dentro do intervalo da tabela hash (0 a TAM-1).
 int hash(char *name); 
 
+// Função: getValue
+// Descrição: Recupera um valor da tabela hash com base no nome fornecido e o operador especificado.
+// Pré-condição: A tabela hash 'h' deve estar inicializada e o ponteiro 'name' deve ser uma string válida e não nula. O operador 'op' deve ser uma string válida.
+// Pós-condição: O valor associado ao 'name' na tabela hash 'h' é recuperado e processado de acordo com o operador 'op'.
 void getValue(HashTable *h, char *name, char *op);
 
+// Função: calculateFloat
+// Descrição: Calcula um valor de ponto flutuante a partir de dois valores na tabela hash com base nos nomes fornecidos e o operador especificado.
+// Pré-condição: A tabela hash 'h' deve estar inicializada. Os ponteiros 'name' e 'name2' devem ser strings válidas e não nulas. O operador 'operator' deve ser uma string válida e representando uma operação válida (e.g., "+", "-", "*", "/").
+// Pós-condição: Retorna o resultado da operação de ponto flutuante entre os valores associados aos nomes 'name' e 'name2' na tabela hash 'h'.
 float calculateFloat(HashTable *h, char *name, char *name2, char* operator);
 
+// Função: calculateInt
+// Descrição: Calcula um valor inteiro a partir de dois valores na tabela hash com base nos nomes fornecidos e o operador especificado.
+// Pré-condição: A tabela hash 'h' deve estar inicializada. Os ponteiros 'name' e 'name2' devem ser strings válidas e não nulas. O operador 'operator' deve ser uma string válida e representando uma operação válida (e.g., "+", "-", "*", "/").
+// Pós-condição: Retorna o resultado da operação inteira entre os valores associados aos nomes 'name' e 'name2' na tabela hash 'h'.
 int calculateInt(HashTable *h, char *name, char *name2, char* operator);
 
+// Função: SearchParser
+// Descrição: Busca uma célula na tabela hash com base no nome fornecido.
+// Pré-condição: A tabela hash 'h' deve estar inicializada e o ponteiro 'name' deve ser uma string válida e não nula.
+// Pós-condição: Retorna um ponteiro para a célula encontrada que corresponde ao 'name' ou NULL se não for encontrada.
 struct cell *SearchParser(HashTable *h, char *name);
 
+// Função: setType
+// Descrição: Define o tipo de um item na tabela hash com base no nome fornecido.
+// Pré-condição: A tabela hash 'h' deve estar inicializada. O ponteiro 'name' deve ser uma string válida e não nula. 'type' deve ser um valor inteiro representando o tipo desejado.
+// Pós-condição: O tipo do item associado ao 'name' na tabela hash 'h' é atualizado para o valor especificado por 'type'.
 void setType(HashTable *h, char *name, int type);
 
+// Função: setCategory
+// Descrição: Define a categoria de um item na tabela hash com base no nome fornecido.
+// Pré-condição: A tabela hash 'h' deve estar inicializada. O ponteiro 'name' deve ser uma string válida e não nula. 'cat' deve ser um valor inteiro representando a categoria desejada.
+// Pós-condição: A categoria do item associado ao 'name' na tabela hash 'h' é atualizada para o valor especificado por 'cat'.
 void setCategory(HashTable *h, char *name, int cat);
 
 // Função para buscar um token (nome) na tabela hash

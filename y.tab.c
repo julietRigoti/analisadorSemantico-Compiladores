@@ -219,8 +219,8 @@ union YYSTYPE
 {
 #line 18 "parser.y"
 
-		struct teste{
-			char name[MAX*2];
+		struct {
+			char name[MAX*2]; //
 			int type;
 			int category;
 			int valueInt;
@@ -710,12 +710,12 @@ static const yytype_int16 yyrline[] =
 {
        0,    48,    48,    53,    68,    72,    74,    79,    81,    85,
       88,    91,    94,    97,   100,   103,   106,   110,   115,   120,
-     126,   129,   132,   135,   138,   151,   154,   159,   163,   180,
-     186,   190,   200,   211,   221,   225,   229,   231,   233,   237,
-     241,   256,   285,   321,   326,   352,   373,   378,   392,   396,
-     401,   424,   445,   466,   485,   488,   494,   502,   507,   512,
-     515,   518,   522,   529,   532,   536,   539,   543,   546,   550,
-     554,   558
+     126,   129,   132,   135,   138,   151,   154,   159,   162,   167,
+     173,   177,   187,   197,   207,   211,   215,   217,   219,   223,
+     227,   240,   253,   256,   261,   282,   297,   302,   316,   320,
+     325,   344,   363,   382,   401,   404,   408,   413,   418,   423,
+     426,   429,   433,   440,   443,   447,   450,   454,   457,   461,
+     465,   469
 };
 #endif
 
@@ -1460,7 +1460,7 @@ yyreduce:
 
   case 9: /* cont: attSTATE  */
 #line 85 "parser.y"
-                { 
+              { 
 			(yyval.obj).tr = insertNode((yyvsp[0].obj).tr, NULL, "attSTATE");
 		}
 #line 1467 "y.tab.c"
@@ -1614,139 +1614,134 @@ yyreduce:
 #line 159 "parser.y"
                {
 			setType(HT, (yyvsp[0].obj).name, 5);
-			
 		  (yyval.obj).tr = insertNode(NULL, NULL, "PRINTF");}
-#line 1620 "y.tab.c"
+#line 1619 "y.tab.c"
     break;
 
   case 28: /* PRorSC: SCANF  */
-#line 163 "parser.y"
+#line 162 "parser.y"
                   {
 			setType(HT, (yyvsp[0].obj).name, 5);
-			
 		  (yyval.obj).tr = insertNode(NULL, NULL, "SCANF");
 }
-#line 1630 "y.tab.c"
+#line 1628 "y.tab.c"
     break;
 
   case 29: /* NUMorEMP: numNat  */
-#line 180 "parser.y"
+#line 167 "parser.y"
                  {
 			setType(H, (yyvsp[0].obj).name, 1);
 			setCategory(H, (yyvsp[0].obj).name, 8);
 			getValue(H, (yyvsp[0].obj).name, (yyvsp[0].obj).name);
 			(yyval.obj).tr = insertNode((yyvsp[0].obj).tr, NULL, "NUMBER");
 			}
-#line 1641 "y.tab.c"
+#line 1639 "y.tab.c"
     break;
 
   case 30: /* NUMorEMP: %empty  */
-#line 186 "parser.y"
+#line 173 "parser.y"
                                   {
 				(yyval.obj).tr = NULL;
 }
-#line 1649 "y.tab.c"
+#line 1647 "y.tab.c"
     break;
 
   case 31: /* args: dataType MULT ID  */
-#line 190 "parser.y"
-                       {
+#line 177 "parser.y"
+                       { //char * var;
 		struct cell *temp = SearchParser(H, (yyvsp[0].obj).name);
 		if(temp->type == 4){
 			setType(H, (yyvsp[0].obj).name, (yyvsp[-2].obj).type);
 			setCategory(H, (yyvsp[0].obj).name, 9);
-			(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, NULL, "dataType *ID");
+			(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[0].obj).tr, "dataType *ID");
 		} else {
 			printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
 		 }
 		}
-#line 1664 "y.tab.c"
+#line 1662 "y.tab.c"
     break;
 
   case 32: /* args: dataType ID O_BRAC C_BRAC  */
-#line 200 "parser.y"
-                                    { 
+#line 187 "parser.y"
+                                    { //char argv[]
 		struct cell *temp = SearchParser(H, (yyvsp[-2].obj).name);
 		if(temp->type == 4){
 			setType(H, (yyvsp[-2].obj).name, (yyvsp[-3].obj).type);
 			setCategory(H, (yyvsp[-2].obj).name, 9);
-
-			(yyval.obj).tr = insertNode((yyvsp[-3].obj).tr, NULL, "dataType ID[]");
+			(yyval.obj).tr = insertNode((yyvsp[-3].obj).tr, (yyvsp[-2].obj).tr, "dataType ID[]");
 		} else {
 			printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
 		 }
 		}
-#line 1680 "y.tab.c"
+#line 1677 "y.tab.c"
     break;
 
   case 33: /* args: dataType ID  */
-#line 211 "parser.y"
-                      { 
+#line 197 "parser.y"
+                      { //int x;
 		struct cell *temp = SearchParser(H, (yyvsp[0].obj).name);
 		if(temp->type == 4){
 			setType(H, (yyvsp[0].obj).name, (yyvsp[-1].obj).type);
 			setCategory(H, (yyvsp[0].obj).name, 14);
-			(yyval.obj).tr = insertNode((yyvsp[-1].obj).tr, NULL, "dataType ID");
+			(yyval.obj).tr = insertNode((yyvsp[-1].obj).tr, (yyvsp[0].obj).tr, "dataType ID");
 		} else {
 			printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
 		 }
 		}
-#line 1695 "y.tab.c"
+#line 1692 "y.tab.c"
     break;
 
   case 34: /* args: %empty  */
-#line 221 "parser.y"
+#line 207 "parser.y"
                          {
 			(yyval.obj).tr = NULL;
 }
-#line 1703 "y.tab.c"
+#line 1700 "y.tab.c"
     break;
 
   case 35: /* PRorSC_STATE: PRorSC O_PAR STR bodyPRorSC C_PAR SEMICOLON  */
-#line 225 "parser.y"
+#line 211 "parser.y"
                                                           {
 				(yyval.obj).tr = insertNode((yyvsp[-5].obj).tr, (yyvsp[-2].obj).tr, "PRorSC (STR bodyPRorSC);");
 }
-#line 1711 "y.tab.c"
+#line 1708 "y.tab.c"
     break;
 
   case 36: /* bodyPRorSC: COMMA ID bodyPRorSC  */
-#line 229 "parser.y"
+#line 215 "parser.y"
                                 {
-				 (yyval.obj).tr = insertNode(NULL, (yyvsp[0].obj).tr, ", ID bodyPRorSC");}
-#line 1718 "y.tab.c"
+				 (yyval.obj).tr = insertNode((yyvsp[-1].obj).tr, (yyvsp[0].obj).tr, ", ID bodyPRorSC");}
+#line 1715 "y.tab.c"
     break;
 
   case 37: /* bodyPRorSC: COMMA expCOND bodyPRorSC  */
-#line 231 "parser.y"
+#line 217 "parser.y"
                                                  { 
 				(yyval.obj).tr = insertNode((yyvsp[-1].obj).tr, (yyvsp[0].obj).tr, ", expCOND bodyPRorSC");}
-#line 1725 "y.tab.c"
+#line 1722 "y.tab.c"
     break;
 
   case 38: /* bodyPRorSC: %empty  */
-#line 233 "parser.y"
+#line 219 "parser.y"
                                           {
 					(yyval.obj).tr = NULL;
 }
-#line 1733 "y.tab.c"
+#line 1730 "y.tab.c"
     break;
 
   case 39: /* attSTATE: bodyATT SEMICOLON  */
-#line 237 "parser.y"
+#line 223 "parser.y"
                             {
 	(yyval.obj).tr = insertNode((yyvsp[-1].obj).tr, NULL, "bodyATT;");
 }
-#line 1741 "y.tab.c"
+#line 1738 "y.tab.c"
     break;
 
   case 40: /* bodyATT: dataType ID  */
-#line 241 "parser.y"
+#line 227 "parser.y"
                      {
-			//printf("Entrou na 1°regra(dataType %s)\n", $2.name);
 			struct cell *temp = SearchParser(H, (yyvsp[0].obj).name);
 			if(temp->type == 4){
-				//printf("$1.type = %d\n", $1.type);
 				setType(H, (yyvsp[0].obj).name, (yyvsp[-1].obj).type);
 				setCategory(H, (yyvsp[0].obj).name, 9);
 				(yyval.obj).type = (yyvsp[-1].obj).type;
@@ -1757,13 +1752,12 @@ yyreduce:
 				printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
 			}
 		}
-#line 1761 "y.tab.c"
+#line 1756 "y.tab.c"
     break;
 
   case 41: /* bodyATT: bodyATT COMMA ID  */
-#line 256 "parser.y"
+#line 240 "parser.y"
                                   {
-			//printf("Entrou na 2°regra(bodyATT COMMA %s)\n", $2.name);
 			struct cell *temp = SearchParser(H, (yyvsp[0].obj).name);
 			if(temp->type == 4){
 				setCategory(H, (yyvsp[0].obj).name, 9);
@@ -1776,46 +1770,40 @@ yyreduce:
 				printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
 			}	
 		}
-#line 1780 "y.tab.c"
+#line 1774 "y.tab.c"
     break;
 
   case 42: /* bodyATT: attSTR  */
-#line 285 "parser.y"
+#line 253 "parser.y"
                        {
-			//printf("Entrou na 4°regra(attSTR)\n");
 			(yyval.obj).tr = insertNode((yyvsp[0].obj).tr, NULL, "attSTR"); 
 		}
-#line 1789 "y.tab.c"
+#line 1782 "y.tab.c"
     break;
 
   case 43: /* bodyATT: error  */
-#line 321 "parser.y"
+#line 256 "parser.y"
                       {
 			(yyval.obj).tr = insertNode(NULL, NULL, "_ERROR_");
 			flagError++;
 }
-#line 1798 "y.tab.c"
+#line 1791 "y.tab.c"
     break;
 
   case 44: /* stateATTEXP: dataType ID ASSIGMENT expCOND SEMICOLON  */
-#line 326 "parser.y"
+#line 261 "parser.y"
                                                     {		
-	//printf("Entrou na 1°regra(dataType %s ASSIGMENT expCOND)\n", $2.name);
 
 		struct cell *temp = SearchParser(H, (yyvsp[-3].obj).name);
 		if(temp->type == 4){
-			//printf("Entrou no if que temp->type é igual de 4 (type = %d)\n", temp->type);
-			//printf("dataType = %d\n", $1.type);
 			setType(H, (yyvsp[-3].obj).name, (yyvsp[-4].obj).type);
 			setCategory(H, (yyvsp[-3].obj).name, 9);
 			if((yyvsp[-4].obj).type == (yyvsp[-1].obj).type){
 				(yyval.obj).type = (yyvsp[-1].obj).type;
 				getValue(H, (yyvsp[-3].obj).name, (yyvsp[-1].obj).name);
-				//printf("temp->%s = %d\n", temp->name, temp->iVal);
 				(yyval.obj).tr = insertNode(NULL, (yyvsp[-1].obj).tr, "dataType ID = expCOND;");
 				(yyval.obj).tr = insertNode((yyvsp[-4].obj).tr, (yyvsp[-3].obj).tr, "dataType ID");
 				
-				//printf("pós inserção no nó da arvore\n");
 			} else {
 				printf("Erro Semantico: Tipo de dados imcopativeis na linha %d\n", flag);
 			}
@@ -1825,25 +1813,19 @@ yyreduce:
 		}
 
 	}
-#line 1829 "y.tab.c"
+#line 1817 "y.tab.c"
     break;
 
   case 45: /* stateATTEXP: ID ASSIGMENT expCOND SEMICOLON  */
-#line 352 "parser.y"
+#line 282 "parser.y"
                                       {
 		printf("Entrou na 2°regra(%s ASSIGMENT expCOND SEMICOLON)\n", (yyvsp[-3].obj).name);
 		struct cell *temp = SearchParser(H, (yyvsp[-3].obj).name);
 		if(temp->type == (yyvsp[-1].obj).type){
-			//printf("Entrou no if que temp->type é igual ao tipo do expCond(3.type = %d) (type = %d)\n", temp->type, $3.type);
 			(yyval.obj).type = (yyvsp[-1].obj).type;
 			setType(H, temp->name, (yyvsp[-1].obj).type);
-			//printf("setou o tipo\n");
-			//setCategory(H, $1.name, 9);
 			getValue(H, (yyvsp[-3].obj).name, (yyvsp[-1].obj).name);
-			//printf("temp->%s = %d\n", temp->name, temp->iVal);
-			//printf("setou a categoria\n");
 			(yyval.obj).tr = insertNode((yyvsp[-3].obj).tr, (yyvsp[-1].obj).tr, "ID = expCOND;");
-			//printf("pós inserção no nó da arvore\n");
 		} else if(temp->type == 4){
 			printf("Erro Semantico: Variavel não foi declarada na linha %d\n", flag);
 		}
@@ -1851,20 +1833,20 @@ yyreduce:
 			printf("Erro Semantico: Tipo de dados imcopativeis na linha %d\n", flag);
 		}
 	}
-#line 1855 "y.tab.c"
+#line 1837 "y.tab.c"
     break;
 
   case 46: /* stateATTEXP: error  */
-#line 373 "parser.y"
+#line 297 "parser.y"
               {
 			(yyval.obj).tr = insertNode(NULL, NULL, "_ERROR_");
 			flagError++;
 }
-#line 1864 "y.tab.c"
+#line 1846 "y.tab.c"
     break;
 
   case 47: /* attSTR: dataType ID O_BRAC NUMorEMP C_BRAC bodySTR  */
-#line 378 "parser.y"
+#line 302 "parser.y"
                                                   {
 	struct cell *temp = SearchParser(H, (yyvsp[-5].obj).name);
 	if(temp->type == 4){
@@ -1878,44 +1860,40 @@ yyreduce:
 			printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
 	}
 }
-#line 1882 "y.tab.c"
+#line 1864 "y.tab.c"
     break;
 
   case 48: /* bodySTR: ASSIGMENT STR  */
-#line 392 "parser.y"
+#line 316 "parser.y"
                        {
 			(yyval.obj).type = 3;
 			struct node *a = insertNode(NULL, NULL, (yyvsp[0].obj).name); 
 			(yyval.obj).tr = insertNode(a, NULL, (yyvsp[-1].obj).name);}
-#line 1891 "y.tab.c"
+#line 1873 "y.tab.c"
     break;
 
   case 49: /* bodySTR: %empty  */
-#line 396 "parser.y"
+#line 320 "parser.y"
                                   {
 				(yyval.obj).tr = NULL;
 }
-#line 1899 "y.tab.c"
+#line 1881 "y.tab.c"
     break;
 
   case 50: /* expCOND: expCOND SUM expCOND  */
-#line 401 "parser.y"
+#line 325 "parser.y"
                                     {
 			if((yyvsp[-2].obj).type == (yyvsp[0].obj).type){
-				printf("expCOND + expCOND\n");
 				(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[-1].obj).tr, "expCOND + expCOND");
 				(yyval.obj).type = (yyvsp[-2].obj).type; 
 				if((yyval.obj).type == 1){
 					(yyval.obj).valueInt = calculateInt(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "+"); 
-					printf("$$.valueInt = %d\n", (yyval.obj).valueInt);
 					sprintf( (yyval.obj).name, "%d", (yyval.obj).valueInt);
 					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 1, 8);
-					printf("$$.name = %s\n", (yyval.obj).name);
 				}else if((yyval.obj).type == 2){
 					(yyval.obj).valueDouble = calculateFloat(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "+");
 					sprintf((yyval.obj).name, "%.2f", (yyval.obj).valueDouble);
 					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 2, 8);
-					printf("$$.name = %s\n", (yyval.obj).name);
 				}
 			}
 			else {
@@ -1923,11 +1901,11 @@ yyreduce:
 				(yyval.obj).type = 4;
 			}
 		}
-#line 1927 "y.tab.c"
+#line 1905 "y.tab.c"
     break;
 
   case 51: /* expCOND: expCOND SUB expCOND  */
-#line 424 "parser.y"
+#line 344 "parser.y"
                                     {
 			if((yyvsp[-2].obj).type == (yyvsp[0].obj).type){
 				(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[-1].obj).tr, "expCOND - expCOND");
@@ -1936,12 +1914,10 @@ yyreduce:
 					(yyval.obj).valueInt = calculateInt(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "-"); 
 					sprintf( (yyval.obj).name, "%d", (yyval.obj).valueInt);
 					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 1, 8);
-					printf("$$.name = %s\n", (yyval.obj).name);
 				}else if((yyval.obj).type == 2){
 					(yyval.obj).valueDouble = calculateFloat(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "-");
 					sprintf((yyval.obj).name, "%.2f", (yyval.obj).valueDouble);
 					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 2, 8);
-					printf("$$.name = %s\n", (yyval.obj).name);
 				}
 			}
 			else {
@@ -1949,20 +1925,18 @@ yyreduce:
 				(yyval.obj).type = 4;
 			}
 		}
-#line 1953 "y.tab.c"
+#line 1929 "y.tab.c"
     break;
 
   case 52: /* expCOND: expCOND MULT expCOND  */
-#line 445 "parser.y"
+#line 363 "parser.y"
                                      {
 			if((yyvsp[-2].obj).type == (yyvsp[0].obj).type){
 				(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[-1].obj).tr, "expCOND * expCOND");
 				(yyval.obj).type = (yyvsp[-2].obj).type; 
 				if((yyval.obj).type == 1){
 					(yyval.obj).valueInt = calculateInt(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "*");
-					printf("$$.valueInt = %d\n", (yyval.obj).valueInt); 
 					sprintf((yyval.obj).name, "%d", (yyval.obj).valueInt);
-					printf("$$.name = %s\n", (yyval.obj).name);
 					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 1, 8);
 				}else if((yyval.obj).type == 2){
 					(yyval.obj).valueDouble = calculateFloat(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "*");
@@ -1975,11 +1949,11 @@ yyreduce:
 				(yyval.obj).type = 4;
 			}
 		}
-#line 1979 "y.tab.c"
+#line 1953 "y.tab.c"
     break;
 
   case 53: /* expCOND: expCOND DIV expCOND  */
-#line 466 "parser.y"
+#line 382 "parser.y"
                                     {
 			if((yyvsp[-2].obj).type == (yyvsp[0].obj).type){
 				(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[-1].obj).tr, "expCOND / expCOND");
@@ -1999,168 +1973,163 @@ yyreduce:
 				(yyval.obj).type = 4;
 			}
 		}
-#line 2003 "y.tab.c"
+#line 1977 "y.tab.c"
     break;
 
   case 54: /* expCOND: O_PAR expCOND C_PAR  */
-#line 485 "parser.y"
+#line 401 "parser.y"
                                     {
 			(yyval.obj).tr = insertNode(NULL, (yyvsp[-1].obj).tr, "O_PAR expCOND C_PAR");
 		}
-#line 2011 "y.tab.c"
+#line 1985 "y.tab.c"
     break;
 
   case 55: /* expCOND: ID  */
-#line 488 "parser.y"
+#line 404 "parser.y"
                    {
-			//printf("BBBBBBBBBBBBBBBBBBBb");
 			(yyval.obj).type = (yyvsp[0].obj).type;
 			(yyval.obj).tr = insertNode(NULL, NULL, 	"ID");
-			//printf("pós inserção no nó da arvore\n");
 		}
-#line 2022 "y.tab.c"
+#line 1994 "y.tab.c"
     break;
 
   case 56: /* expCOND: numNat  */
-#line 494 "parser.y"
+#line 408 "parser.y"
                        {
-			//printf("AAAAAAAAAAAAAAAAaaaa\n");
 			(yyval.obj).type = (yyvsp[0].obj).type;
-			//printf("$1.type do numNat = %d\n", $1.type);
 	  		(yyval.obj).tr = insertNode((yyvsp[0].obj).tr, NULL, "NUMBER");
-			//printf("pós inserção no nó da arvore\n");
 
 		}
-#line 2035 "y.tab.c"
+#line 2004 "y.tab.c"
     break;
 
   case 57: /* expCOND: error  */
-#line 502 "parser.y"
+#line 413 "parser.y"
                       {
 			(yyval.obj).tr = insertNode(NULL, NULL, "_ERROR_");
 			flagError++;
 }
-#line 2044 "y.tab.c"
+#line 2013 "y.tab.c"
     break;
 
   case 58: /* ifSTATE: IF O_PAR expCOND C_PAR bodyLOOP elseSTATE  */
-#line 507 "parser.y"
+#line 418 "parser.y"
                                                    {
 			struct node * init = insertNode((yyvsp[-3].obj).tr, (yyvsp[-1].obj).tr, "IF (expCOND) bodyLOOP");
 			(yyval.obj).tr = insertNode(init, (yyvsp[0].obj).tr, "bodyIF");
 }
-#line 2053 "y.tab.c"
+#line 2022 "y.tab.c"
     break;
 
   case 59: /* elseSTATE: ELSE O_KEY content C_KEY  */
-#line 512 "parser.y"
+#line 423 "parser.y"
                                      {
 				(yyval.obj).tr = insertNode((yyvsp[-1].obj).tr, NULL, "ELSE O_KEY content C_KEY"); 
 			}
-#line 2061 "y.tab.c"
+#line 2030 "y.tab.c"
     break;
 
   case 60: /* elseSTATE: ELSE ifSTATE  */
-#line 515 "parser.y"
+#line 426 "parser.y"
                                      {
 				(yyval.obj).tr = insertNode(NULL, (yyvsp[0].obj).tr, "else ifSTATE"); 
 			}
-#line 2069 "y.tab.c"
+#line 2038 "y.tab.c"
     break;
 
   case 61: /* elseSTATE: %empty  */
-#line 518 "parser.y"
+#line 429 "parser.y"
                                  {
 					(yyval.obj).tr = NULL;
 }
-#line 2077 "y.tab.c"
+#line 2046 "y.tab.c"
     break;
 
   case 62: /* forSTATE: FOR O_PAR forINIT SEMICOLON expCOND SEMICOLON forUpdate C_PAR bodyLOOP  */
-#line 522 "parser.y"
+#line 433 "parser.y"
                                                                                  {
 				struct node* init = insertNode(NULL, (yyvsp[-6].obj).tr, "forINIT");
 				struct node* cond = insertNode((yyvsp[-4].obj).tr, (yyvsp[-2].obj).tr, "forMID");
 				struct node* f = insertNode(init, cond, "for");
 				(yyval.obj).tr = insertNode(f, (yyvsp[0].obj).tr, "forSTATE");
 }
-#line 2088 "y.tab.c"
+#line 2057 "y.tab.c"
     break;
 
   case 63: /* forINIT: bodyATT  */
-#line 529 "parser.y"
+#line 440 "parser.y"
                  {
 			(yyval.obj).tr = insertNode((yyvsp[0].obj).tr, NULL, "dataType InitFor");
 			}
-#line 2096 "y.tab.c"
+#line 2065 "y.tab.c"
     break;
 
   case 64: /* forINIT: %empty  */
-#line 532 "parser.y"
+#line 443 "parser.y"
                                  {
 				(yyval.obj).tr = NULL;
 }
-#line 2104 "y.tab.c"
+#line 2073 "y.tab.c"
     break;
 
   case 65: /* forUpdate: UpdateDF  */
-#line 536 "parser.y"
+#line 447 "parser.y"
                     { 
 			(yyval.obj).tr = insertNode((yyvsp[0].obj).tr, NULL, "forUpdate");
 			}
-#line 2112 "y.tab.c"
+#line 2081 "y.tab.c"
     break;
 
   case 66: /* forUpdate: %empty  */
-#line 539 "parser.y"
+#line 450 "parser.y"
                                   {
 				(yyval.obj).tr = NULL;
 }
-#line 2120 "y.tab.c"
+#line 2089 "y.tab.c"
     break;
 
   case 67: /* UpdateDF: ID opINCorDEC  */
-#line 543 "parser.y"
+#line 454 "parser.y"
                         {
 		(yyval.obj).tr = insertNode(NULL, (yyvsp[0].obj).tr, "ID opINCorDEC");
 		}
-#line 2128 "y.tab.c"
+#line 2097 "y.tab.c"
     break;
 
   case 68: /* UpdateDF: UpdateDF COMMA UpdateDF  */
-#line 546 "parser.y"
+#line 457 "parser.y"
                                   { 
 		(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[0].obj).tr, "UpdateDF, UpdateDF"); 
 }
-#line 2136 "y.tab.c"
+#line 2105 "y.tab.c"
     break;
 
   case 69: /* whileSTATE: WHILE O_PAR expCOND C_PAR bodyLOOP  */
-#line 550 "parser.y"
+#line 461 "parser.y"
                                               { 
 				(yyval.obj).tr = insertNode(NULL, (yyvsp[-2].obj).tr, "whileSTATE"); 
 }
-#line 2144 "y.tab.c"
+#line 2113 "y.tab.c"
     break;
 
   case 70: /* bodyLOOP: O_KEY content C_KEY  */
-#line 554 "parser.y"
+#line 465 "parser.y"
                              { 
 			(yyval.obj).tr = insertNode(NULL, (yyvsp[-1].obj).tr, "bodyLOOP"); 
 }
-#line 2152 "y.tab.c"
+#line 2121 "y.tab.c"
     break;
 
   case 71: /* comentSTATE: O_COMENT content C_COMENT  */
-#line 558 "parser.y"
+#line 469 "parser.y"
                                       { 
 			(yyval.obj).tr = insertNode(NULL, (yyvsp[-1].obj).tr, "comentSTATE"); 
 }
-#line 2160 "y.tab.c"
+#line 2129 "y.tab.c"
     break;
 
 
-#line 2164 "y.tab.c"
+#line 2133 "y.tab.c"
 
       default: break;
     }
@@ -2353,7 +2322,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 562 "parser.y"
+#line 473 "parser.y"
 
 
 void yyerror (){
@@ -2381,9 +2350,6 @@ int main(int argc, char *argv[]){
 		if(yyin != NULL){
 			yylex();
 			yyparse();
-			
-			/*for (int i = 0; i < TAM; i++)
-				printf("H[%d] = %s\n", i, H->table[i]->name);*/
 			
 			printHash(HT);
 			printHash(H);

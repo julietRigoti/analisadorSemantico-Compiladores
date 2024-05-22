@@ -1,0 +1,65 @@
+| | | ARVORE SINTATICA | | |
+program
+ ├headers headers
+ |  ├INCLUDE
+ |  ┕INCLUDE
+ ┕main
+ |  ├cab
+ |  |  ├INT
+ |  |  ┕dataType ID[]
+ |  |  |  ├CHAR
+ |  ┕body
+ |  |  ├content cont
+ |  |  |  ├content cont
+ |  |  |  |  ├content cont
+ |  |  |  |  |  ├content cont
+ |  |  |  |  |  |  ├content cont
+ |  |  |  |  |  |  |  ├content cont
+ |  |  |  |  |  |  |  |  ├content cont
+ |  |  |  |  |  |  |  |  |  ├content cont
+ |  |  |  |  |  |  |  |  |  |  ├cont
+ |  |  |  |  |  |  |  |  |  |  |  ├attSTATE
+ |  |  |  |  |  |  |  |  |  |  |  |  ├bodyATT;
+ |  |  |  |  |  |  |  |  |  |  |  |  |  ├bodyATT, ID
+ |  |  |  |  |  |  |  |  |  |  |  |  |  |  ├dataType ID
+ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  ├INT
+ |  |  |  |  |  |  |  |  |  |  ┕attSTATE
+ |  |  |  |  |  |  |  |  |  |  |  ├bodyATT;
+ |  |  |  |  |  |  |  |  |  |  |  |  ├dataType ID
+ |  |  |  |  |  |  |  |  |  |  |  |  |  ├FLOAT
+ |  |  |  |  |  |  |  |  |  ┕attSTATE
+ |  |  |  |  |  |  |  |  |  |  ├bodyATT;
+ |  |  |  |  |  |  |  |  |  |  |  ├bodyATT, ID
+ |  |  |  |  |  |  |  |  |  |  |  |  ├dataType ID
+ |  |  |  |  |  |  |  |  |  |  |  |  |  ├DOUBLE
+ |  |  |  |  |  |  |  |  ┕attSTATE
+ |  |  |  |  |  |  |  |  |  ├bodyATT;
+ |  |  |  |  |  |  |  |  |  |  ├bodyATT, ID
+ |  |  |  |  |  |  |  |  |  |  |  ├dataType ID
+ |  |  |  |  |  |  |  |  |  |  |  |  ├CHAR
+ |  |  |  |  |  |  |  ┕attSTATE
+ |  |  |  |  |  |  |  |  ├bodyATT;
+ |  |  |  |  |  |  |  |  |  ├bodyATT, ID
+ |  |  |  |  |  |  |  |  |  |  ├dataType ID
+ |  |  |  |  |  |  |  |  |  |  |  ├VOID
+ |  |  |  |  |  |  ┕attSTATEXP
+ |  |  |  |  |  |  |  ├ID = expCOND;
+ |  |  |  |  |  |  |  |  ┕NUMBER
+ |  |  |  |  |  |  |  |  |  ├INT
+ |  |  |  |  |  |  |  |  |  |  ├2
+ |  |  |  |  |  ┕attSTATEXP
+ |  |  |  |  |  |  ├dataType ID
+ |  |  |  |  |  |  |  ├INT
+ |  |  |  |  ┕attSTATEXP
+ |  |  |  |  |  ├dataType ID
+ |  |  |  |  |  |  ├FLOAT
+ |  |  |  ┕attSTATEXP
+ |  |  |  |  ├ID = expCOND;
+ |  |  |  |  |  ┕expCOND * expCOND
+ |  |  |  |  |  |  ├NUMBER
+ |  |  |  |  |  |  |  ├INT
+ |  |  |  |  |  |  |  |  ├50
+ |  |  ┕RETURN expCOND;
+ |  |  |  ┕NUMBER
+ |  |  |  |  ├INT
+ |  |  |  |  |  ├1

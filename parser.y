@@ -179,7 +179,7 @@ args: dataType MULT ID { //char * var;
 		if(temp->type == 4){
 			setType(H, $3.name, $1.type);
 			setCategory(H, $3.name, 9);
-			$$.tr = insertNode($1.tr, NULL, "dataType *ID");
+			$$.tr = insertNode($1.tr, $3.tr, "dataType *ID");
 		} else {
 			printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
 		 }
@@ -189,7 +189,7 @@ args: dataType MULT ID { //char * var;
 		if(temp->type == 4){
 			setType(H, $2.name, $1.type);
 			setCategory(H, $2.name, 9);
-			$$.tr = insertNode($1.tr, NULL, "dataType ID[]");
+			$$.tr = insertNode($1.tr, $2.tr, "dataType ID[]");
 		} else {
 			printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
 		 }
@@ -199,7 +199,7 @@ args: dataType MULT ID { //char * var;
 		if(temp->type == 4){
 			setType(H, $2.name, $1.type);
 			setCategory(H, $2.name, 14);
-			$$.tr = insertNode($1.tr, NULL, "dataType ID");
+			$$.tr = insertNode($1.tr, $2.tr, "dataType ID");
 		} else {
 			printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
 		 }
@@ -213,7 +213,7 @@ PRorSC_STATE: PRorSC O_PAR STR bodyPRorSC C_PAR SEMICOLON {
 };
 
 bodyPRorSC: COMMA ID bodyPRorSC {
-				 $$.tr = insertNode(NULL, $3.tr, ", ID bodyPRorSC");} | 
+				 $$.tr = insertNode($2.tr, $3.tr, ", ID bodyPRorSC");} | 
 			COMMA expCOND bodyPRorSC { 
 				$$.tr = insertNode($2.tr, $3.tr, ", expCOND bodyPRorSC");} |
 				 /*empty*/{
@@ -225,10 +225,8 @@ attSTATE: bodyATT SEMICOLON {
 };
 
 bodyATT: dataType ID {
-			//printf("Entrou na 1°regra(dataType %s)\n", $2.name);
 			struct cell *temp = SearchParser(H, $2.name);
 			if(temp->type == 4){
-				//printf("$1.type = %d\n", $1.type);
 				setType(H, $2.name, $1.type);
 				setCategory(H, $2.name, 9);
 				$$.type = $1.type;
@@ -240,7 +238,6 @@ bodyATT: dataType ID {
 			}
 		}| 
 		bodyATT COMMA ID  {
-			//printf("Entrou na 2°regra(bodyATT COMMA %s)\n", $2.name);
 			struct cell *temp = SearchParser(H, $3.name);
 			if(temp->type == 4){
 				setCategory(H, $3.name, 9);
@@ -253,79 +250,26 @@ bodyATT: dataType ID {
 				printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
 			}	
 		}| 
-		/*bodyATT ASSIGMENT NUMorID {
-			printf("Entrou na 3°regra(bodyATT ASSIGMENT NUMorID)\n");
-			struct cell *temp = SearchParser(H, $1.name);
-			if(temp->type != 4){
-				$$.type = $3.type;
-				getValue(H, $1.name, $3.name);
-				setCategory(H, $3.name, 9);
-				setType(H, $3.name, $1.type);
-				strcpy($$.name, $3.name);
-				$$.tr = insertNode($1.tr, $3.tr, "bodyATT = NUMorID");}
-			else {
-				printf("Entrou na 3°regra(bodyATT ASSIGMENT NUMorID)\n");
-				printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
-			}
-		}| */
 		attSTR {
-			//printf("Entrou na 4°regra(attSTR)\n");
 			$$.tr = insertNode($1.tr, NULL, "attSTR"); 
 		}| 
-		/*ID ASSIGMENT NUMorID {
-			printf("Entrou na 5°regra(ID ASSIGMENT NUMorID)\n");
-			struct cell *temp = SearchParser(H, $1.name);
-			if(temp->type != 4){
-				getValue(H, $1.name, $3.name);
-				setCategory(H, $1.name, 9);
-				setType(H, $3.name, $1.type);
-				$$.type = $1.type;
-				strcpy($$.name, $3.name);
-				$$.tr = insertNode(NULL, $3.tr, "ID = NUMorID");
-			}
-			else {
-				printf("Entrou na 5°regra(ID ASSIGMENT NUMorID)\n");
-				printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
-			}
-		}|*/
-		/*idAndexpCOND{
-			printf("Entrou na 6°regra(idAndexpCOND)\n");
-			/*struct cell *temp = SearchParser(H, $1.name);
-			if(temp->type != 4){
-				getValue(H, $1.name, $3.name);
-				setCategory(H, $1.name, 9);
-				setType(H, $3.name, $1.type);
-				$$.type = $1.type;
-				strcpy($$.name, $3.name);
-				
-			}
-			$$.tr = insertNode($1.tr, NULL, "idAndexpCOND");
-			/*else {printf("Entrou na 5°regra(ID ASSIGMENT NUMorID)\n");
-				printf("Erro Semantico: Tipo de variavel redefinida na linha %d\n", flag);
-			}
-		}|*/
 		error {
 			$$.tr = insertNode(NULL, NULL, "_ERROR_");
 			flagError++;
 };
 
 stateATTEXP: dataType ID ASSIGMENT expCOND SEMICOLON{		
-	//printf("Entrou na 1°regra(dataType %s ASSIGMENT expCOND)\n", $2.name);
 
 		struct cell *temp = SearchParser(H, $2.name);
 		if(temp->type == 4){
-			//printf("Entrou no if que temp->type é igual de 4 (type = %d)\n", temp->type);
-			//printf("dataType = %d\n", $1.type);
 			setType(H, $2.name, $1.type);
 			setCategory(H, $2.name, 9);
 			if($1.type == $4.type){
 				$$.type = $4.type;
 				getValue(H, $2.name, $4.name);
-				//printf("temp->%s = %d\n", temp->name, temp->iVal);
 				$$.tr = insertNode(NULL, $4.tr, "dataType ID = expCOND;");
 				$$.tr = insertNode($1.tr, $2.tr, "dataType ID");
 				
-				//printf("pós inserção no nó da arvore\n");
 			} else {
 				printf("Erro Semantico: Tipo de dados imcopativeis na linha %d\n", flag);
 			}
@@ -339,16 +283,10 @@ stateATTEXP: dataType ID ASSIGMENT expCOND SEMICOLON{
 		printf("Entrou na 2°regra(%s ASSIGMENT expCOND SEMICOLON)\n", $1.name);
 		struct cell *temp = SearchParser(H, $1.name);
 		if(temp->type == $3.type){
-			//printf("Entrou no if que temp->type é igual ao tipo do expCond(3.type = %d) (type = %d)\n", temp->type, $3.type);
 			$$.type = $3.type;
 			setType(H, temp->name, $3.type);
-			//printf("setou o tipo\n");
-			//setCategory(H, $1.name, 9);
 			getValue(H, $1.name, $3.name);
-			//printf("temp->%s = %d\n", temp->name, temp->iVal);
-			//printf("setou a categoria\n");
 			$$.tr = insertNode($1.tr, $3.tr, "ID = expCOND;");
-			//printf("pós inserção no nó da arvore\n");
 		} else if(temp->type == 4){
 			printf("Erro Semantico: Variavel não foi declarada na linha %d\n", flag);
 		}
@@ -386,20 +324,16 @@ bodySTR: ASSIGMENT STR {
 expCOND: 
 		expCOND SUM expCOND {
 			if($1.type == $3.type){
-				printf("expCOND + expCOND\n");
 				$$.tr = insertNode($1.tr, $2.tr, "expCOND + expCOND");
 				$$.type = $1.type; 
 				if($$.type == 1){
 					$$.valueInt = calculateInt(H, $1.name, $3.name, "+"); 
-					printf("$$.valueInt = %d\n", $$.valueInt);
 					sprintf( $$.name, "%d", $$.valueInt);
 					inserts(H, $$.name, strlen($$.name), flag, 1, 8);
-					printf("$$.name = %s\n", $$.name);
 				}else if($$.type == 2){
 					$$.valueDouble = calculateFloat(H, $1.name, $3.name, "+");
 					sprintf($$.name, "%.2f", $$.valueDouble);
 					inserts(H, $$.name, strlen($$.name), flag, 2, 8);
-					printf("$$.name = %s\n", $$.name);
 				}
 			}
 			else {
@@ -415,12 +349,10 @@ expCOND:
 					$$.valueInt = calculateInt(H, $1.name, $3.name, "-"); 
 					sprintf( $$.name, "%d", $$.valueInt);
 					inserts(H, $$.name, strlen($$.name), flag, 1, 8);
-					printf("$$.name = %s\n", $$.name);
 				}else if($$.type == 2){
 					$$.valueDouble = calculateFloat(H, $1.name, $3.name, "-");
 					sprintf($$.name, "%.2f", $$.valueDouble);
 					inserts(H, $$.name, strlen($$.name), flag, 2, 8);
-					printf("$$.name = %s\n", $$.name);
 				}
 			}
 			else {
@@ -434,9 +366,7 @@ expCOND:
 				$$.type = $1.type; 
 				if($$.type == 1){
 					$$.valueInt = calculateInt(H, $1.name, $3.name, "*");
-					printf("$$.valueInt = %d\n", $$.valueInt); 
 					sprintf($$.name, "%d", $$.valueInt);
-					printf("$$.name = %s\n", $$.name);
 					inserts(H, $$.name, strlen($$.name), flag, 1, 8);
 				}else if($$.type == 2){
 					$$.valueDouble = calculateFloat(H, $1.name, $3.name, "*");
@@ -472,17 +402,12 @@ expCOND:
 			$$.tr = insertNode(NULL, $2.tr, "O_PAR expCOND C_PAR");
 		}|
 		ID {
-			//printf("BBBBBBBBBBBBBBBBBBBb");
 			$$.type = $1.type;
 			$$.tr = insertNode(NULL, NULL, 	"ID");
-			//printf("pós inserção no nó da arvore\n");
 		}|
 		numNat {
-			//printf("AAAAAAAAAAAAAAAAaaaa\n");
 			$$.type = $1.type;
-			//printf("$1.type do numNat = %d\n", $1.type);
 	  		$$.tr = insertNode($1.tr, NULL, "NUMBER");
-			//printf("pós inserção no nó da arvore\n");
 
 		}|
 		error {
@@ -572,9 +497,6 @@ int main(int argc, char *argv[]){
 		if(yyin != NULL){
 			yylex();
 			yyparse();
-			
-			/*for (int i = 0; i < TAM; i++)
-				printf("H[%d] = %s\n", i, H->table[i]->name);*/
 			
 			printHash(HT);
 			printHash(H);

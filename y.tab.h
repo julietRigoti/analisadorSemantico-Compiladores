@@ -145,8 +145,8 @@ union YYSTYPE
 {
 #line 18 "parser.y"
 
-		struct teste{
-			char name[MAX*2];
+		struct {
+			char name[MAX*2]; //
 			int type;
 			int category;
 			int valueInt;
