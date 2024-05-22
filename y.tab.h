@@ -149,8 +149,8 @@ union YYSTYPE
 			char name[MAX*2]; //
 			int type;
 			int category;
-			int valueInt;
-			double valueDouble;
+			char valueInt[MAX*2];
+			char valueDouble[MAX*2];
 			struct node* tr; 
 		} obj;
 

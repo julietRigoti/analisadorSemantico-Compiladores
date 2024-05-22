@@ -20,8 +20,8 @@
 			char name[MAX*2]; //
 			int type;
 			int category;
-			int valueInt;
-			double valueDouble;
+			char valueInt[MAX*2];
+			char valueDouble[MAX*2];
 			struct node* tr; 
 		} obj;
 }
@@ -280,7 +280,6 @@ stateATTEXP: dataType ID ASSIGMENT expCOND SEMICOLON{
 
 	}|
 	ID ASSIGMENT expCOND SEMICOLON{
-		printf("Entrou na 2°regra(%s ASSIGMENT expCOND SEMICOLON)\n", $1.name);
 		struct cell *temp = SearchParser(H, $1.name);
 		if(temp->type == $3.type){
 			$$.type = $3.type;
@@ -326,15 +325,9 @@ expCOND:
 			if($1.type == $3.type){
 				$$.tr = insertNode($1.tr, $2.tr, "expCOND + expCOND");
 				$$.type = $1.type; 
-				if($$.type == 1){
-					$$.valueInt = calculateInt(H, $1.name, $3.name, "+"); 
-					sprintf( $$.name, "%d", $$.valueInt);
-					inserts(H, $$.name, strlen($$.name), flag, 1, 8);
-				}else if($$.type == 2){
-					$$.valueDouble = calculateFloat(H, $1.name, $3.name, "+");
-					sprintf($$.name, "%.2f", $$.valueDouble);
-					inserts(H, $$.name, strlen($$.name), flag, 2, 8);
-				}
+				calculateTest(H, $1.name, $3.name, "+", $$.name); 
+				//sprintf( $$.name, "%d", $$.valueInt);
+				inserts(H, $$.name, strlen($$.name), flag, 1, 8);
 			}
 			else {
 				printf("Erro Semantico: Tipo incompativel na linha %d\n", flag);
@@ -343,17 +336,11 @@ expCOND:
 		}|
 		expCOND SUB expCOND {
 			if($1.type == $3.type){
-				$$.tr = insertNode($1.tr, $2.tr, "expCOND - expCOND");
+				$$.tr = insertNode($1.tr, $2.tr, "expCOND + expCOND");
 				$$.type = $1.type; 
-				if($$.type == 1){
-					$$.valueInt = calculateInt(H, $1.name, $3.name, "-"); 
-					sprintf( $$.name, "%d", $$.valueInt);
-					inserts(H, $$.name, strlen($$.name), flag, 1, 8);
-				}else if($$.type == 2){
-					$$.valueDouble = calculateFloat(H, $1.name, $3.name, "-");
-					sprintf($$.name, "%.2f", $$.valueDouble);
-					inserts(H, $$.name, strlen($$.name), flag, 2, 8);
-				}
+				calculateTest(H, $1.name, $3.name, "-", $$.name); 
+				//sprintf( $$.name, "%d", $$.valueInt);
+				inserts(H, $$.name, strlen($$.name), flag, 1, 8);
 			}
 			else {
 				printf("Erro Semantico: Tipo incompativel na linha %d\n", flag);
@@ -362,17 +349,11 @@ expCOND:
 		}|
 		expCOND MULT expCOND {
 			if($1.type == $3.type){
-				$$.tr = insertNode($1.tr, $2.tr, "expCOND * expCOND");
+				$$.tr = insertNode($1.tr, $2.tr, "expCOND + expCOND");
 				$$.type = $1.type; 
-				if($$.type == 1){
-					$$.valueInt = calculateInt(H, $1.name, $3.name, "*");
-					sprintf($$.name, "%d", $$.valueInt);
-					inserts(H, $$.name, strlen($$.name), flag, 1, 8);
-				}else if($$.type == 2){
-					$$.valueDouble = calculateFloat(H, $1.name, $3.name, "*");
-					sprintf($$.name, "%.2f", $$.valueDouble);
-					inserts(H, $$.name, strlen($$.name), flag, 2, 8);
-				}
+				calculateTest(H, $1.name, $3.name, "*", $$.name); 
+				//sprintf( $$.name, "%d", $$.valueInt);
+				inserts(H, $$.name, strlen($$.name), flag, 1, 8);
 			}
 			else {
 				printf("Erro Semantico: Tipo incompativel na linha %d\n", flag);
@@ -381,17 +362,11 @@ expCOND:
 		}|
 		expCOND DIV expCOND {
 			if($1.type == $3.type){
-				$$.tr = insertNode($1.tr, $2.tr, "expCOND / expCOND");
+				$$.tr = insertNode($1.tr, $2.tr, "expCOND + expCOND");
 				$$.type = $1.type; 
-				if($$.type == 1){
-					$$.valueInt = calculateInt(H, $1.name, $3.name, "/"); 
-					sprintf( $$.name, "%d", $$.valueInt);
-					inserts(H, $$.name, strlen($$.name), flag, 1, 8);
-				}else if($$.type == 2){
-					$$.valueDouble = calculateFloat(H, $1.name, $3.name, "/");
-					sprintf($$.name, "%.2f", $$.valueDouble);
-					inserts(H, $$.name, strlen($$.name), flag, 2, 8);
-				}
+				calculateTest(H, $1.name, $3.name, "/", $$.name); 
+				//sprintf( $$.name, "%d", $$.valueInt);
+				inserts(H, $$.name, strlen($$.name), flag, 1, 8);
 			}
 			else {
 				printf("Erro Semantico: Tipo incompativel na linha %d\n", flag);

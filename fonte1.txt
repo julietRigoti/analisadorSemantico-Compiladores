@@ -4,16 +4,14 @@
 
 int main(char argv[]){
     int ix, iix;
-    float ffx;
+    float ffx = 10.51;
     double dx, ddx;
     char cx, ccx;
     void vx, vvx;
     
     ix = 2;
 
-    int lx = 3 + 2; 
-    float fx = 10.5 - 5.5; 
-    lx = 50 * 5;
-
+    int lx = 3 - 2; 
+    lx = 6 * 35;
     return 1;
 }

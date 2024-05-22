@@ -16,49 +16,44 @@ program
  |  |  |  |  |  |  ├content cont
  |  |  |  |  |  |  |  ├content cont
  |  |  |  |  |  |  |  |  ├content cont
- |  |  |  |  |  |  |  |  |  ├content cont
- |  |  |  |  |  |  |  |  |  |  ├cont
- |  |  |  |  |  |  |  |  |  |  |  ├attSTATE
- |  |  |  |  |  |  |  |  |  |  |  |  ├bodyATT;
- |  |  |  |  |  |  |  |  |  |  |  |  |  ├bodyATT, ID
- |  |  |  |  |  |  |  |  |  |  |  |  |  |  ├dataType ID
- |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  ├INT
- |  |  |  |  |  |  |  |  |  |  ┕attSTATE
+ |  |  |  |  |  |  |  |  |  ├cont
+ |  |  |  |  |  |  |  |  |  |  ├attSTATE
  |  |  |  |  |  |  |  |  |  |  |  ├bodyATT;
- |  |  |  |  |  |  |  |  |  |  |  |  ├dataType ID
- |  |  |  |  |  |  |  |  |  |  |  |  |  ├FLOAT
- |  |  |  |  |  |  |  |  |  ┕attSTATE
- |  |  |  |  |  |  |  |  |  |  ├bodyATT;
- |  |  |  |  |  |  |  |  |  |  |  ├bodyATT, ID
- |  |  |  |  |  |  |  |  |  |  |  |  ├dataType ID
- |  |  |  |  |  |  |  |  |  |  |  |  |  ├DOUBLE
+ |  |  |  |  |  |  |  |  |  |  |  |  ├bodyATT, ID
+ |  |  |  |  |  |  |  |  |  |  |  |  |  ├dataType ID
+ |  |  |  |  |  |  |  |  |  |  |  |  |  |  ├INT
+ |  |  |  |  |  |  |  |  |  ┕attSTATEXP
+ |  |  |  |  |  |  |  |  |  |  ├dataType ID
+ |  |  |  |  |  |  |  |  |  |  |  ├FLOAT
  |  |  |  |  |  |  |  |  ┕attSTATE
  |  |  |  |  |  |  |  |  |  ├bodyATT;
  |  |  |  |  |  |  |  |  |  |  ├bodyATT, ID
  |  |  |  |  |  |  |  |  |  |  |  ├dataType ID
- |  |  |  |  |  |  |  |  |  |  |  |  ├CHAR
+ |  |  |  |  |  |  |  |  |  |  |  |  ├DOUBLE
  |  |  |  |  |  |  |  ┕attSTATE
  |  |  |  |  |  |  |  |  ├bodyATT;
  |  |  |  |  |  |  |  |  |  ├bodyATT, ID
  |  |  |  |  |  |  |  |  |  |  ├dataType ID
- |  |  |  |  |  |  |  |  |  |  |  ├VOID
- |  |  |  |  |  |  ┕attSTATEXP
- |  |  |  |  |  |  |  ├ID = expCOND;
- |  |  |  |  |  |  |  |  ┕NUMBER
- |  |  |  |  |  |  |  |  |  ├INT
- |  |  |  |  |  |  |  |  |  |  ├2
+ |  |  |  |  |  |  |  |  |  |  |  ├CHAR
+ |  |  |  |  |  |  ┕attSTATE
+ |  |  |  |  |  |  |  ├bodyATT;
+ |  |  |  |  |  |  |  |  ├bodyATT, ID
+ |  |  |  |  |  |  |  |  |  ├dataType ID
+ |  |  |  |  |  |  |  |  |  |  ├VOID
  |  |  |  |  |  ┕attSTATEXP
- |  |  |  |  |  |  ├dataType ID
- |  |  |  |  |  |  |  ├INT
+ |  |  |  |  |  |  ├ID = expCOND;
+ |  |  |  |  |  |  |  ┕NUMBER
+ |  |  |  |  |  |  |  |  ├INT
+ |  |  |  |  |  |  |  |  |  ├2
  |  |  |  |  ┕attSTATEXP
  |  |  |  |  |  ├dataType ID
- |  |  |  |  |  |  ├FLOAT
+ |  |  |  |  |  |  ├INT
  |  |  |  ┕attSTATEXP
  |  |  |  |  ├ID = expCOND;
- |  |  |  |  |  ┕expCOND * expCOND
+ |  |  |  |  |  ┕expCOND + expCOND
  |  |  |  |  |  |  ├NUMBER
  |  |  |  |  |  |  |  ├INT
- |  |  |  |  |  |  |  |  ├50
+ |  |  |  |  |  |  |  |  ├6
  |  |  ┕RETURN expCOND;
  |  |  |  ┕NUMBER
  |  |  |  |  ├INT

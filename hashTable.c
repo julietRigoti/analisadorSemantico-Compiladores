@@ -51,66 +51,44 @@ void getValue(HashTable *h, char *name, char *op){
     
 }
 
-float calculateFloat(HashTable *h, char *name, char *name2, char* operator){
-    float opF = 0;
+void calculateTest(HashTable *h, char *name, char *name2, char* operator, char *destino){
     int index = hash(name);
     int index2 = hash(name2);
     struct cell *aux = h->table[index];
     struct cell *aux2 = h->table[index2];
 
     if (strcmp(operator, "+") == 0){
-        opF = aux->fVal + aux2->fVal;
-        return opF;
-    }
-    else if (strcmp(operator, "-") == 0){
-        opF = aux->fVal - aux2->fVal;
-        return opF;
-    }
-    else if (strcmp(operator, "*") == 0){
-        opF = aux->fVal * aux2->fVal;
-        return opF;
-    }
-    else if (strcmp(operator, "/") == 0){
-       if(aux2->fVal != 0.00 && aux->fVal != 0.00 ){
-            opF = aux->fVal / aux2->fVal;
+        if(aux->type == 1){
+            sprintf(destino, "%d", aux->iVal + aux2->iVal);
+        } else {
+            sprintf(destino, "%.2f", aux->fVal + aux2->fVal);
         }
-        else printf("Não é possivel efetuar a operação de divisão\n");     
-        return opF;
-    }
-}
-
-int calculateInt(HashTable *h, char *name, char *name2, char* operator){
-    int op = 0;
-    int index = hash(name);
-    int index2 = hash(name2);
-    struct cell *aux = h->table[index];
-    struct cell *aux2 = h->table[index2];
-    if (strcmp(operator, "+") == 0){
-        if(aux->type == 1)
-            op = aux->iVal + aux2->iVal;
-        return op;
     }
     else if (strcmp(operator, "-") == 0){
-        if(aux->type == 1)
-            op = aux->iVal - aux2->iVal;
-        return op;
+        if(aux->type == 1){
+            sprintf(destino, "%d", aux->iVal - aux2->iVal);
+        } else {
+            sprintf(destino, "%.2f", aux->fVal - aux2->fVal);
+        }
     }
     else if (strcmp(operator, "*") == 0){
-        if(aux->type == 1)
-            op = aux->iVal * aux2->iVal;
-        return op;
+       if(aux->type == 1){
+            sprintf(destino, "%d", aux->iVal * aux2->iVal);
+        } else {
+            sprintf(destino, "%.2f", aux->fVal * aux2->fVal);
+        }
     }
     else if (strcmp(operator, "/") == 0){
-       if(aux->type == 1)
-            if(aux2->iVal != 0 && aux->iVal != 0 ){
-                op = aux->iVal / aux2->iVal;
+        if(aux2->iVal != 0 && aux->iVal != 0 ){
+            if(aux->type == 1){
+                sprintf(destino, "%d", aux->iVal / aux2->iVal);
+            } else {
+                sprintf(destino, "%.2f", aux->fVal / aux2->fVal);
             }
-            else printf("Não é possivel efetuar a operação de divisão\n");
-        return op;
+        }
+         else printf("Não é possivel efetuar a operação de divisão\n");
     }
-    return op;
 }
-
 void setType(HashTable *h, char *name, int type){
     int index = hash(name);
     struct cell *aux = h->table[index];
@@ -282,7 +260,7 @@ void printHash(HashTable *H){
             case 3: 
                 printf("%-10s\t|", aux->cVal);
             default:
-                printf("-------\t|");
+                 printf("           \t|");
                 break;
             }
             

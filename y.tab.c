@@ -223,8 +223,8 @@ union YYSTYPE
 			char name[MAX*2]; //
 			int type;
 			int category;
-			int valueInt;
-			double valueDouble;
+			char valueInt[MAX*2];
+			char valueDouble[MAX*2];
 			struct node* tr; 
 		} obj;
 
@@ -713,9 +713,9 @@ static const yytype_int16 yyrline[] =
      126,   129,   132,   135,   138,   151,   154,   159,   162,   167,
      173,   177,   187,   197,   207,   211,   215,   217,   219,   223,
      227,   240,   253,   256,   261,   282,   297,   302,   316,   320,
-     325,   344,   363,   382,   401,   404,   408,   413,   418,   423,
-     426,   429,   433,   440,   443,   447,   450,   454,   457,   461,
-     465,   469
+     325,   338,   351,   364,   377,   380,   384,   389,   394,   399,
+     402,   405,   409,   416,   419,   423,   426,   430,   433,   437,
+     441,   445
 };
 #endif
 
@@ -1886,63 +1886,63 @@ yyreduce:
 			if((yyvsp[-2].obj).type == (yyvsp[0].obj).type){
 				(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[-1].obj).tr, "expCOND + expCOND");
 				(yyval.obj).type = (yyvsp[-2].obj).type; 
-				if((yyval.obj).type == 1){
-					(yyval.obj).valueInt = calculateInt(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "+"); 
-					sprintf( (yyval.obj).name, "%d", (yyval.obj).valueInt);
-					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 1, 8);
-				}else if((yyval.obj).type == 2){
-					(yyval.obj).valueDouble = calculateFloat(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "+");
-					sprintf((yyval.obj).name, "%.2f", (yyval.obj).valueDouble);
-					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 2, 8);
-				}
+				calculateTest(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "+", (yyval.obj).name); 
+				//sprintf( $$.name, "%d", $$.valueInt);
+				inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 1, 8);
 			}
 			else {
 				printf("Erro Semantico: Tipo incompativel na linha %d\n", flag);
 				(yyval.obj).type = 4;
 			}
 		}
-#line 1905 "y.tab.c"
+#line 1899 "y.tab.c"
     break;
 
   case 51: /* expCOND: expCOND SUB expCOND  */
-#line 344 "parser.y"
+#line 338 "parser.y"
                                     {
 			if((yyvsp[-2].obj).type == (yyvsp[0].obj).type){
-				(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[-1].obj).tr, "expCOND - expCOND");
+				(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[-1].obj).tr, "expCOND + expCOND");
 				(yyval.obj).type = (yyvsp[-2].obj).type; 
-				if((yyval.obj).type == 1){
-					(yyval.obj).valueInt = calculateInt(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "-"); 
-					sprintf( (yyval.obj).name, "%d", (yyval.obj).valueInt);
-					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 1, 8);
-				}else if((yyval.obj).type == 2){
-					(yyval.obj).valueDouble = calculateFloat(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "-");
-					sprintf((yyval.obj).name, "%.2f", (yyval.obj).valueDouble);
-					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 2, 8);
-				}
+				calculateTest(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "-", (yyval.obj).name); 
+				//sprintf( $$.name, "%d", $$.valueInt);
+				inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 1, 8);
 			}
 			else {
 				printf("Erro Semantico: Tipo incompativel na linha %d\n", flag);
 				(yyval.obj).type = 4;
 			}
 		}
-#line 1929 "y.tab.c"
+#line 1917 "y.tab.c"
     break;
 
   case 52: /* expCOND: expCOND MULT expCOND  */
-#line 363 "parser.y"
+#line 351 "parser.y"
                                      {
 			if((yyvsp[-2].obj).type == (yyvsp[0].obj).type){
-				(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[-1].obj).tr, "expCOND * expCOND");
+				(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[-1].obj).tr, "expCOND + expCOND");
 				(yyval.obj).type = (yyvsp[-2].obj).type; 
-				if((yyval.obj).type == 1){
-					(yyval.obj).valueInt = calculateInt(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "*");
-					sprintf((yyval.obj).name, "%d", (yyval.obj).valueInt);
-					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 1, 8);
-				}else if((yyval.obj).type == 2){
-					(yyval.obj).valueDouble = calculateFloat(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "*");
-					sprintf((yyval.obj).name, "%.2f", (yyval.obj).valueDouble);
-					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 2, 8);
-				}
+				calculateTest(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "*", (yyval.obj).name); 
+				//sprintf( $$.name, "%d", $$.valueInt);
+				inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 1, 8);
+			}
+			else {
+				printf("Erro Semantico: Tipo incompativel na linha %d\n", flag);
+				(yyval.obj).type = 4;
+			}
+		}
+#line 1935 "y.tab.c"
+    break;
+
+  case 53: /* expCOND: expCOND DIV expCOND  */
+#line 364 "parser.y"
+                                    {
+			if((yyvsp[-2].obj).type == (yyvsp[0].obj).type){
+				(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[-1].obj).tr, "expCOND + expCOND");
+				(yyval.obj).type = (yyvsp[-2].obj).type; 
+				calculateTest(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "/", (yyval.obj).name); 
+				//sprintf( $$.name, "%d", $$.valueInt);
+				inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 1, 8);
 			}
 			else {
 				printf("Erro Semantico: Tipo incompativel na linha %d\n", flag);
@@ -1952,184 +1952,160 @@ yyreduce:
 #line 1953 "y.tab.c"
     break;
 
-  case 53: /* expCOND: expCOND DIV expCOND  */
-#line 382 "parser.y"
-                                    {
-			if((yyvsp[-2].obj).type == (yyvsp[0].obj).type){
-				(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[-1].obj).tr, "expCOND / expCOND");
-				(yyval.obj).type = (yyvsp[-2].obj).type; 
-				if((yyval.obj).type == 1){
-					(yyval.obj).valueInt = calculateInt(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "/"); 
-					sprintf( (yyval.obj).name, "%d", (yyval.obj).valueInt);
-					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 1, 8);
-				}else if((yyval.obj).type == 2){
-					(yyval.obj).valueDouble = calculateFloat(H, (yyvsp[-2].obj).name, (yyvsp[0].obj).name, "/");
-					sprintf((yyval.obj).name, "%.2f", (yyval.obj).valueDouble);
-					inserts(H, (yyval.obj).name, strlen((yyval.obj).name), flag, 2, 8);
-				}
-			}
-			else {
-				printf("Erro Semantico: Tipo incompativel na linha %d\n", flag);
-				(yyval.obj).type = 4;
-			}
-		}
-#line 1977 "y.tab.c"
-    break;
-
   case 54: /* expCOND: O_PAR expCOND C_PAR  */
-#line 401 "parser.y"
+#line 377 "parser.y"
                                     {
 			(yyval.obj).tr = insertNode(NULL, (yyvsp[-1].obj).tr, "O_PAR expCOND C_PAR");
 		}
-#line 1985 "y.tab.c"
+#line 1961 "y.tab.c"
     break;
 
   case 55: /* expCOND: ID  */
-#line 404 "parser.y"
+#line 380 "parser.y"
                    {
 			(yyval.obj).type = (yyvsp[0].obj).type;
 			(yyval.obj).tr = insertNode(NULL, NULL, 	"ID");
 		}
-#line 1994 "y.tab.c"
+#line 1970 "y.tab.c"
     break;
 
   case 56: /* expCOND: numNat  */
-#line 408 "parser.y"
+#line 384 "parser.y"
                        {
 			(yyval.obj).type = (yyvsp[0].obj).type;
 	  		(yyval.obj).tr = insertNode((yyvsp[0].obj).tr, NULL, "NUMBER");
 
 		}
-#line 2004 "y.tab.c"
+#line 1980 "y.tab.c"
     break;
 
   case 57: /* expCOND: error  */
-#line 413 "parser.y"
+#line 389 "parser.y"
                       {
 			(yyval.obj).tr = insertNode(NULL, NULL, "_ERROR_");
 			flagError++;
 }
-#line 2013 "y.tab.c"
+#line 1989 "y.tab.c"
     break;
 
   case 58: /* ifSTATE: IF O_PAR expCOND C_PAR bodyLOOP elseSTATE  */
-#line 418 "parser.y"
+#line 394 "parser.y"
                                                    {
 			struct node * init = insertNode((yyvsp[-3].obj).tr, (yyvsp[-1].obj).tr, "IF (expCOND) bodyLOOP");
 			(yyval.obj).tr = insertNode(init, (yyvsp[0].obj).tr, "bodyIF");
 }
-#line 2022 "y.tab.c"
+#line 1998 "y.tab.c"
     break;
 
   case 59: /* elseSTATE: ELSE O_KEY content C_KEY  */
-#line 423 "parser.y"
+#line 399 "parser.y"
                                      {
 				(yyval.obj).tr = insertNode((yyvsp[-1].obj).tr, NULL, "ELSE O_KEY content C_KEY"); 
 			}
-#line 2030 "y.tab.c"
+#line 2006 "y.tab.c"
     break;
 
   case 60: /* elseSTATE: ELSE ifSTATE  */
-#line 426 "parser.y"
+#line 402 "parser.y"
                                      {
 				(yyval.obj).tr = insertNode(NULL, (yyvsp[0].obj).tr, "else ifSTATE"); 
 			}
-#line 2038 "y.tab.c"
+#line 2014 "y.tab.c"
     break;
 
   case 61: /* elseSTATE: %empty  */
-#line 429 "parser.y"
+#line 405 "parser.y"
                                  {
 					(yyval.obj).tr = NULL;
 }
-#line 2046 "y.tab.c"
+#line 2022 "y.tab.c"
     break;
 
   case 62: /* forSTATE: FOR O_PAR forINIT SEMICOLON expCOND SEMICOLON forUpdate C_PAR bodyLOOP  */
-#line 433 "parser.y"
+#line 409 "parser.y"
                                                                                  {
 				struct node* init = insertNode(NULL, (yyvsp[-6].obj).tr, "forINIT");
 				struct node* cond = insertNode((yyvsp[-4].obj).tr, (yyvsp[-2].obj).tr, "forMID");
 				struct node* f = insertNode(init, cond, "for");
 				(yyval.obj).tr = insertNode(f, (yyvsp[0].obj).tr, "forSTATE");
 }
-#line 2057 "y.tab.c"
+#line 2033 "y.tab.c"
     break;
 
   case 63: /* forINIT: bodyATT  */
-#line 440 "parser.y"
+#line 416 "parser.y"
                  {
 			(yyval.obj).tr = insertNode((yyvsp[0].obj).tr, NULL, "dataType InitFor");
 			}
-#line 2065 "y.tab.c"
+#line 2041 "y.tab.c"
     break;
 
   case 64: /* forINIT: %empty  */
-#line 443 "parser.y"
+#line 419 "parser.y"
                                  {
 				(yyval.obj).tr = NULL;
 }
-#line 2073 "y.tab.c"
+#line 2049 "y.tab.c"
     break;
 
   case 65: /* forUpdate: UpdateDF  */
-#line 447 "parser.y"
+#line 423 "parser.y"
                     { 
 			(yyval.obj).tr = insertNode((yyvsp[0].obj).tr, NULL, "forUpdate");
 			}
-#line 2081 "y.tab.c"
+#line 2057 "y.tab.c"
     break;
 
   case 66: /* forUpdate: %empty  */
-#line 450 "parser.y"
+#line 426 "parser.y"
                                   {
 				(yyval.obj).tr = NULL;
+}
+#line 2065 "y.tab.c"
+    break;
+
+  case 67: /* UpdateDF: ID opINCorDEC  */
+#line 430 "parser.y"
+                        {
+		(yyval.obj).tr = insertNode(NULL, (yyvsp[0].obj).tr, "ID opINCorDEC");
+		}
+#line 2073 "y.tab.c"
+    break;
+
+  case 68: /* UpdateDF: UpdateDF COMMA UpdateDF  */
+#line 433 "parser.y"
+                                  { 
+		(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[0].obj).tr, "UpdateDF, UpdateDF"); 
+}
+#line 2081 "y.tab.c"
+    break;
+
+  case 69: /* whileSTATE: WHILE O_PAR expCOND C_PAR bodyLOOP  */
+#line 437 "parser.y"
+                                              { 
+				(yyval.obj).tr = insertNode(NULL, (yyvsp[-2].obj).tr, "whileSTATE"); 
 }
 #line 2089 "y.tab.c"
     break;
 
-  case 67: /* UpdateDF: ID opINCorDEC  */
-#line 454 "parser.y"
-                        {
-		(yyval.obj).tr = insertNode(NULL, (yyvsp[0].obj).tr, "ID opINCorDEC");
-		}
+  case 70: /* bodyLOOP: O_KEY content C_KEY  */
+#line 441 "parser.y"
+                             { 
+			(yyval.obj).tr = insertNode(NULL, (yyvsp[-1].obj).tr, "bodyLOOP"); 
+}
 #line 2097 "y.tab.c"
     break;
 
-  case 68: /* UpdateDF: UpdateDF COMMA UpdateDF  */
-#line 457 "parser.y"
-                                  { 
-		(yyval.obj).tr = insertNode((yyvsp[-2].obj).tr, (yyvsp[0].obj).tr, "UpdateDF, UpdateDF"); 
+  case 71: /* comentSTATE: O_COMENT content C_COMENT  */
+#line 445 "parser.y"
+                                      { 
+			(yyval.obj).tr = insertNode(NULL, (yyvsp[-1].obj).tr, "comentSTATE"); 
 }
 #line 2105 "y.tab.c"
     break;
 
-  case 69: /* whileSTATE: WHILE O_PAR expCOND C_PAR bodyLOOP  */
-#line 461 "parser.y"
-                                              { 
-				(yyval.obj).tr = insertNode(NULL, (yyvsp[-2].obj).tr, "whileSTATE"); 
-}
-#line 2113 "y.tab.c"
-    break;
 
-  case 70: /* bodyLOOP: O_KEY content C_KEY  */
-#line 465 "parser.y"
-                             { 
-			(yyval.obj).tr = insertNode(NULL, (yyvsp[-1].obj).tr, "bodyLOOP"); 
-}
-#line 2121 "y.tab.c"
-    break;
-
-  case 71: /* comentSTATE: O_COMENT content C_COMENT  */
-#line 469 "parser.y"
-                                      { 
-			(yyval.obj).tr = insertNode(NULL, (yyvsp[-1].obj).tr, "comentSTATE"); 
-}
-#line 2129 "y.tab.c"
-    break;
-
-
-#line 2133 "y.tab.c"
+#line 2109 "y.tab.c"
 
       default: break;
     }
@@ -2322,7 +2298,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 473 "parser.y"
+#line 449 "parser.y"
 
 
 void yyerror (){

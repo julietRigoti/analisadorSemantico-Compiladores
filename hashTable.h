@@ -42,17 +42,12 @@ int hash(char *name);
 // Pós-condição: O valor associado ao 'name' na tabela hash 'h' é recuperado e processado de acordo com o operador 'op'.
 void getValue(HashTable *h, char *name, char *op);
 
-// Função: calculateFloat
-// Descrição: Calcula um valor de ponto flutuante a partir de dois valores na tabela hash com base nos nomes fornecidos e o operador especificado.
+// Função: calculateTest
+// Descrição: Calcula um valor a partir de dois valores na tabela hash com base nos nomes fornecidos e o operador especificado.
 // Pré-condição: A tabela hash 'h' deve estar inicializada. Os ponteiros 'name' e 'name2' devem ser strings válidas e não nulas. O operador 'operator' deve ser uma string válida e representando uma operação válida (e.g., "+", "-", "*", "/").
-// Pós-condição: Retorna o resultado da operação de ponto flutuante entre os valores associados aos nomes 'name' e 'name2' na tabela hash 'h'.
-float calculateFloat(HashTable *h, char *name, char *name2, char* operator);
+// Pós-condição: Retorna o resultado da operação entre os valores associados aos nomes 'name' e 'name2' na tabela hash 'h'.
 
-// Função: calculateInt
-// Descrição: Calcula um valor inteiro a partir de dois valores na tabela hash com base nos nomes fornecidos e o operador especificado.
-// Pré-condição: A tabela hash 'h' deve estar inicializada. Os ponteiros 'name' e 'name2' devem ser strings válidas e não nulas. O operador 'operator' deve ser uma string válida e representando uma operação válida (e.g., "+", "-", "*", "/").
-// Pós-condição: Retorna o resultado da operação inteira entre os valores associados aos nomes 'name' e 'name2' na tabela hash 'h'.
-int calculateInt(HashTable *h, char *name, char *name2, char* operator);
+void calculateTest(HashTable *h, char *name, char *name2, char* operator, char *destino);
 
 // Função: SearchParser
 // Descrição: Busca uma célula na tabela hash com base no nome fornecido.
